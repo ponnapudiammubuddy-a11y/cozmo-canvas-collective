@@ -73,6 +73,11 @@ export function Footer() {
                 <span className="text-muted-foreground text-sm">Coffee Shops</span>
                 <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground rounded-full">Coming Soon</span>
               </li>
+              <li className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-muted-foreground"></span>
+                <span className="text-muted-foreground text-sm">Lounges</span>
+                <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground rounded-full">Coming Soon</span>
+              </li>
             </ul>
           </div>
 
