@@ -2,31 +2,27 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
-import { HeroSlider } from '@/components/HeroSlider';
+import { CinematicHero } from '@/components/CinematicHero';
 import { Section, SectionHeader } from '@/components/Section';
 import { BrandCard, DirectorCard, ServiceCard, MenuItemCard, PremiumCard } from '@/components/Cards';
 import { BookingForm } from '@/components/BookingForm';
 import { Button } from '@/components/ui/button';
 import { 
   Coffee, UtensilsCrossed, Building2, TreePalm, Wine, 
-  ChefHat, Truck, PartyPopper, Target, Eye, Clock, Award,
-  ShieldCheck, Users, TrendingUp, Sparkles, ArrowRight, MapPin, CalendarCheck
+  Truck, PartyPopper, Target, Eye, Clock, Award,
+  ShieldCheck, Users, TrendingUp, Sparkles, ArrowRight, CalendarCheck, MapPin
 } from 'lucide-react';
-import heroLounge from '@/assets/hero-lounge.jpg';
 import signatureCoffee from '@/assets/signature-coffee.jpg';
 import mocktail from '@/assets/mocktail.jpg';
 import dessert from '@/assets/dessert.jpg';
 import chefSpecial from '@/assets/chef-special.jpg';
-import starters from '@/assets/starters.jpg';
 
 const Index = () => {
   const [showFloatingButton, setShowFloatingButton] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setShowFloatingButton(window.scrollY > 500);
-      setScrollY(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -47,58 +43,8 @@ const Index = () => {
       </Link>
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div className="absolute inset-0">
-          <img 
-            src={heroLounge} 
-            alt="Cozmo Cafe Bistro Lounge Interior"
-            className="w-full h-[120%] object-cover will-change-transform"
-            style={{ transform: `translateY(${scrollY * 0.4}px)` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative container mx-auto px-6 pt-32 pb-20">
-          <div className="max-w-3xl">
-            <span className="inline-block text-primary font-accent text-xl italic mb-4 opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-              Welcome to
-            </span>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-              C E <span className="text-gradient-gold">Hospitality</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4 opacity-0 animate-fade-up font-display" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-              Cozmo Cafe Bistro Lounge
-            </p>
-            <p className="text-lg text-muted-foreground max-w-xl mb-8 opacity-0 animate-fade-up" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-              Experience the art of premium hospitality. From artisan coffee to gourmet cuisine, 
-              immerse yourself in an atmosphere of elegance and exceptional service.
-            </p>
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/booking">Reserve a Table</Link>
-              </Button>
-              <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/menu">Explore Our Menu</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      {/* Featured Items Slider */}
-      <Section dark>
-        <SectionHeader 
-          label="Signature Collection"
-          title="Crafted for Connoisseurs"
-          description="Discover our carefully curated selection of premium offerings, each crafted with passion and served with pride."
-        />
-        <HeroSlider />
-      </Section>
+      {/* Cinematic Hero with Integrated Slider */}
+      <CinematicHero />
 
       {/* Company Overview */}
       <Section id="overview">
