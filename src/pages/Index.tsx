@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
@@ -9,9 +10,8 @@ import { Button } from '@/components/ui/button';
 import { 
   Coffee, UtensilsCrossed, Building2, TreePalm, Wine, 
   ChefHat, Truck, PartyPopper, Target, Eye, Clock, Award,
-  ShieldCheck, Users, TrendingUp, Sparkles, ArrowRight, MapPin
+  ShieldCheck, Users, TrendingUp, Sparkles, ArrowRight, MapPin, CalendarCheck
 } from 'lucide-react';
-
 import heroLounge from '@/assets/hero-lounge.jpg';
 import signatureCoffee from '@/assets/signature-coffee.jpg';
 import mocktail from '@/assets/mocktail.jpg';
@@ -20,8 +20,29 @@ import chefSpecial from '@/assets/chef-special.jpg';
 import starters from '@/assets/starters.jpg';
 
 const Index = () => {
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowFloatingButton(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Floating Reserve Button */}
+      <Link
+        to="/booking"
+        className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-semibold ${
+          showFloatingButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+        }`}
+      >
+        <CalendarCheck className="w-5 h-5" />
+        Reserve Table
+      </Link>
       <Navigation />
       
       {/* Hero Section */}
