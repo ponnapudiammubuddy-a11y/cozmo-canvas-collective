@@ -4,11 +4,12 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { CinematicHero } from '@/components/CinematicHero';
 import { Section, SectionHeader } from '@/components/Section';
-import { BrandCard, DirectorCard, ServiceCard, MenuItemCard, PremiumCard } from '@/components/Cards';
+import { DirectorCard, ServiceCard, MenuItemCard, PremiumCard } from '@/components/Cards';
+import { BrandsSection } from '@/components/BrandsSection';
 import { BookingForm } from '@/components/BookingForm';
 import { Button } from '@/components/ui/button';
 import { 
-  Coffee, UtensilsCrossed, Building2, TreePalm, Wine, 
+  UtensilsCrossed, Building2, 
   Truck, PartyPopper, Target, Eye, Clock, Award,
   ShieldCheck, Users, TrendingUp, Sparkles, ArrowRight, CalendarCheck, MapPin
 } from 'lucide-react';
@@ -104,43 +105,7 @@ const Index = () => {
           title="Building a Hospitality Empire"
           description="From cafés to resorts, we're expanding our vision across multiple hospitality segments."
         />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <BrandCard 
-            name="Cozmo Cafe Bistro Lounge"
-            type="Cafe & Lounge"
-            status="live"
-            description="Our flagship establishment offering premium coffee, artisan mocktails, gourmet cuisine, and a sophisticated lounge experience."
-            icon={<Coffee className="w-7 h-7" />}
-          />
-          <BrandCard 
-            name="Luxury Hotels"
-            type="Hospitality"
-            status="coming-soon"
-            description="World-class accommodations designed to provide unparalleled comfort and memorable stays."
-            icon={<Building2 className="w-7 h-7" />}
-          />
-          <BrandCard 
-            name="Premium Resorts"
-            type="Leisure"
-            status="coming-soon"
-            description="Destination retreats offering relaxation, adventure, and exceptional hospitality experiences."
-            icon={<TreePalm className="w-7 h-7" />}
-          />
-          <BrandCard 
-            name="Specialty Coffee Shops"
-            type="Quick Service"
-            status="coming-soon"
-            description="Artisan coffee destinations bringing specialty brews to urban locations."
-            icon={<Coffee className="w-7 h-7" />}
-          />
-          <BrandCard 
-            name="Exclusive Lounges"
-            type="Entertainment"
-            status="coming-soon"
-            description="Sophisticated evening venues with premium beverages and live entertainment."
-            icon={<Wine className="w-7 h-7" />}
-          />
-        </div>
+        <BrandsSection />
       </Section>
 
       {/* Vision & Mission */}
