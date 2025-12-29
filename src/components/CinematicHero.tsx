@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+import heroLounge from '@/assets/hero-lounge.jpg';
 import signatureCoffee from '@/assets/signature-coffee.jpg';
 import mocktail from '@/assets/mocktail.jpg';
 import dessert from '@/assets/dessert.jpg';
 import chefSpecial from '@/assets/chef-special.jpg';
-import starters from '@/assets/starters.jpg';
 
 const slides = [
+  {
+    image: heroLounge,
+    label: 'WELCOME TO',
+    name: 'C E\nHospitality',
+    tagline: 'Experience the art of premium hospitality. From artisan coffee to gourmet cuisine, immerse yourself in elegance.',
+    cta: 'Reserve a Table',
+    ctaLink: '/booking',
+  },
   {
     image: signatureCoffee,
     label: 'SIGNATURE COLLECTION',
@@ -40,14 +48,6 @@ const slides = [
     name: 'Chef\nSpecials',
     tagline: 'Culinary excellence on your plate with seasonal gourmet creations.',
     cta: 'Explore Menu',
-    ctaLink: '/menu',
-  },
-  {
-    image: starters,
-    label: 'PREMIUM SELECTION',
-    name: 'Signature\nDishes',
-    tagline: 'Begin your journey with perfection, curated starters that delight.',
-    cta: 'View Menu',
     ctaLink: '/menu',
   },
 ];
