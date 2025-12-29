@@ -57,6 +57,8 @@ export function CinematicHero() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedCount, setLoadedCount] = useState(0);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -73,13 +75,35 @@ export function CinematicHero() {
     setAnimationKey((prev) => prev + 1);
   };
 
+  // Preload all images
+  useEffect(() => {
+    let mounted = true;
+    let loaded = 0;
+
+    slides.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.image;
+      img.onload = () => {
+        if (mounted) {
+          loaded++;
+          setLoadedCount(loaded);
+          if (loaded === slides.length) {
+            setTimeout(() => setIsLoading(false), 500);
+          }
+        }
+      };
+    });
+
+    return () => { mounted = false; };
+  }, []);
+
   // Auto-slide with cinematic timing
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || isLoading) return;
     
     const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
+  }, [isAutoPlaying, isLoading, nextSlide]);
 
   // Parallax scroll effect
   useEffect(() => {
@@ -96,6 +120,32 @@ export function CinematicHero() {
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
+      {/* Elegant Preloader */}
+      <div 
+        className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-all duration-1000 ${
+          isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{ backgroundColor: 'hsl(20 10% 5%)' }}
+      >
+        <div className="relative mb-8">
+          {/* Animated logo circle */}
+          <div className="w-20 h-20 rounded-full border-2 border-primary/30 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full border-2 border-t-primary border-r-primary border-b-transparent border-l-transparent animate-spin" 
+              style={{ animationDuration: '1.5s' }} 
+            />
+            <span className="absolute font-display text-2xl text-primary">CE</span>
+          </div>
+        </div>
+        <p className="font-accent text-lg text-muted-foreground italic mb-4">Loading Experience</p>
+        {/* Progress bar */}
+        <div className="w-48 h-[2px] bg-muted rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-primary transition-all duration-300 ease-out"
+            style={{ width: `${(loadedCount / slides.length) * 100}%` }}
+          />
+        </div>
+      </div>
+
       {/* Background Slider with Horizontal Right-to-Left Transition */}
       <div className="absolute inset-0">
         <div 
