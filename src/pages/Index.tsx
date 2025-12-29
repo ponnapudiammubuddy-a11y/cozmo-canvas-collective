@@ -21,10 +21,12 @@ import starters from '@/assets/starters.jpg';
 
 const Index = () => {
   const [showFloatingButton, setShowFloatingButton] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setShowFloatingButton(window.scrollY > 500);
+      setScrollY(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -46,13 +48,14 @@ const Index = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center">
-        {/* Background Image */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image with Parallax */}
         <div className="absolute inset-0">
           <img 
             src={heroLounge} 
             alt="Cozmo Cafe Bistro Lounge Interior"
-            className="w-full h-full object-cover"
+            className="w-full h-[120%] object-cover will-change-transform"
+            style={{ transform: `translateY(${scrollY * 0.4}px)` }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
