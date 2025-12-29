@@ -3,39 +3,81 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-import heroLounge from '@/assets/hero-lounge.jpg';
 import signatureCoffee from '@/assets/signature-coffee.jpg';
 import mocktail from '@/assets/mocktail.jpg';
 import dessert from '@/assets/dessert.jpg';
 import chefSpecial from '@/assets/chef-special.jpg';
+import starters from '@/assets/starters.jpg';
 
 const slides = [
-  { image: heroLounge, alt: 'Luxury Cafe & Lounge Interior' },
-  { image: signatureCoffee, alt: 'Signature Coffee' },
-  { image: mocktail, alt: 'Artisan Mocktails' },
-  { image: dessert, alt: 'Decadent Desserts' },
-  { image: chefSpecial, alt: 'Chef Specials' },
+  {
+    image: signatureCoffee,
+    label: 'SIGNATURE COLLECTION',
+    name: 'Signature\nCoffee',
+    tagline: 'Crafted with precision, served with passion. Premium beans from the finest estates.',
+    cta: 'Order Now',
+    ctaLink: '/menu',
+  },
+  {
+    image: mocktail,
+    label: 'ARTISAN BLENDS',
+    name: 'Artisan\nMocktails',
+    tagline: 'Refreshing blends that ignite your senses with vibrant flavors.',
+    cta: 'View Menu',
+    ctaLink: '/menu',
+  },
+  {
+    image: dessert,
+    label: 'SWEET INDULGENCE',
+    name: 'Decadent\nDesserts',
+    tagline: 'Sweet indulgence in every bite, crafted by our master pastry chefs.',
+    cta: 'Order Now',
+    ctaLink: '/menu',
+  },
+  {
+    image: chefSpecial,
+    label: 'CULINARY EXCELLENCE',
+    name: 'Chef\nSpecials',
+    tagline: 'Culinary excellence on your plate with seasonal gourmet creations.',
+    cta: 'Explore Menu',
+    ctaLink: '/menu',
+  },
+  {
+    image: starters,
+    label: 'PREMIUM SELECTION',
+    name: 'Signature\nDishes',
+    tagline: 'Begin your journey with perfection, curated starters that delight.',
+    cta: 'View Menu',
+    ctaLink: '/menu',
+  },
 ];
 
 export function CinematicHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [scrollY, setScrollY] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setAnimationKey((prev) => prev + 1);
   }, []);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setAnimationKey((prev) => prev + 1);
   }, []);
 
-  // Auto-slide with slow timing
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setAnimationKey((prev) => prev + 1);
+  };
+
+  // Auto-slide with cinematic timing
   useEffect(() => {
     if (!isAutoPlaying) return;
     
-    const interval = setInterval(nextSlide, 7000);
+    const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
@@ -48,22 +90,16 @@ export function CinematicHero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Initial load animation
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <section 
       className="relative h-screen w-full overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
-      {/* Background Slider with Horizontal Transition */}
+      {/* Background Slider with Horizontal Right-to-Left Transition */}
       <div className="absolute inset-0">
         <div 
-          className="flex h-full transition-transform duration-[1500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="flex h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{ 
             width: `${slides.length * 100}%`,
             transform: `translateX(-${currentSlide * (100 / slides.length)}%)` 
@@ -75,119 +111,100 @@ export function CinematicHero() {
               className="relative h-full flex-shrink-0"
               style={{ width: `${100 / slides.length}%` }}
             >
-              {/* Image with parallax and zoom */}
-              <div 
-                className="absolute inset-0 overflow-hidden"
-              >
+              {/* Image with parallax and subtle zoom */}
+              <div className="absolute inset-0 overflow-hidden">
                 <img 
                   src={slide.image} 
-                  alt={slide.alt}
-                  className="w-full h-full object-cover transition-transform duration-[8000ms] ease-out"
+                  alt={slide.name.replace('\n', ' ')}
+                  className="w-full h-full object-cover transition-transform duration-[6000ms] ease-out"
                   style={{ 
-                    transform: `translateY(${scrollY * 0.15}px) scale(${currentSlide === index ? 1.08 : 1})`,
+                    transform: `translateY(${scrollY * 0.2}px) scale(${currentSlide === index ? 1.05 : 1})`,
                   }}
                 />
               </div>
+              
+              {/* Dark luxury gradient overlay per slide */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
             </div>
           ))}
         </div>
-        
-        {/* Dark luxury gradient overlay - consistent across all slides */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
-        <div className="absolute inset-0 bg-background/15" />
       </div>
 
-      {/* Fixed Hero Content */}
+      {/* Hero Content - Centered and changes per slide */}
       <div className="relative h-full flex items-center">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-3xl">
-            {/* Welcome Label */}
+          <div className="max-w-3xl" key={animationKey}>
+            {/* Luxury Label */}
             <span 
-              className={`inline-block text-primary font-accent text-xl md:text-2xl italic mb-4 transition-all duration-1000 ease-out ${
-                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '200ms' }}
+              className="inline-block text-primary font-accent text-sm md:text-base tracking-[0.3em] mb-6 opacity-0 animate-fade-up"
+              style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
             >
-              Welcome to
+              {slides[currentSlide].label}
             </span>
             
-            {/* Main Title */}
+            {/* Large Elegant Headline */}
             <h1 
-              className={`font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 transition-all duration-1000 ease-out ${
-                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '400ms' }}
+              className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground mb-6 leading-[0.95] opacity-0 animate-fade-up"
+              style={{ animationDelay: '250ms', animationFillMode: 'forwards' }}
             >
-              C E <span className="text-gradient-gold">Hospitality</span>
+              {slides[currentSlide].name.split('\n').map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
             </h1>
             
-            {/* Subtitle */}
+            {/* Premium Description */}
             <p 
-              className={`text-xl md:text-2xl text-muted-foreground mb-4 font-display transition-all duration-1000 ease-out ${
-                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '600ms' }}
+              className="text-muted-foreground text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 animate-fade-up"
+              style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
             >
-              Cozmo Cafe Bistro Lounge
+              {slides[currentSlide].tagline}
             </p>
             
-            {/* Description */}
-            <p 
-              className={`text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed transition-all duration-1000 ease-out ${
-                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '800ms' }}
-            >
-              Experience the art of premium hospitality. From artisan coffee to 
-              gourmet cuisine, immerse yourself in an atmosphere of elegance and 
-              exceptional service.
-            </p>
-            
-            {/* CTA Buttons */}
+            {/* Strong CTA Buttons */}
             <div 
-              className={`flex flex-wrap gap-4 transition-all duration-1000 ease-out ${
-                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '1000ms' }}
+              className="flex flex-wrap gap-4 opacity-0 animate-fade-up"
+              style={{ animationDelay: '550ms', animationFillMode: 'forwards' }}
             >
               <Button variant="gold" size="xl" asChild>
-                <Link to="/booking">Reserve a Table</Link>
+                <Link to={slides[currentSlide].ctaLink}>{slides[currentSlide].cta}</Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/menu">Explore Our Menu</Link>
+                <Link to="/about">Explore Our Brand</Link>
               </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation Arrows - Minimal Design */}
+      {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-card/30 backdrop-blur-sm border border-border/20 flex items-center justify-center text-foreground/70 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-500 group"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-card/40 backdrop-blur-md border border-border/30 flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+        <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-card/30 backdrop-blur-sm border border-border/20 flex items-center justify-center text-foreground/70 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-500 group"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-card/40 backdrop-blur-md border border-border/30 flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 group"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+        <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
       </button>
 
-      {/* Minimal Slide Indicators */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2">
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`h-1 rounded-full transition-all duration-700 ${
+            onClick={() => goToSlide(index)}
+            className={`h-2 rounded-full transition-all duration-500 ${
               currentSlide === index 
-                ? 'w-12 bg-primary' 
-                : 'w-2 bg-foreground/20 hover:bg-foreground/40'
+                ? 'w-10 bg-primary' 
+                : 'w-2 bg-foreground/30 hover:bg-foreground/50'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -195,9 +212,9 @@ export function CinematicHero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 right-8 hidden md:flex flex-col items-center gap-2 text-muted-foreground/60">
-        <span className="text-[10px] tracking-[0.25em] rotate-90 origin-center translate-y-5 uppercase">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-muted-foreground/40 to-transparent mt-8" />
+      <div className="absolute bottom-8 right-8 hidden md:flex flex-col items-center gap-2 text-muted-foreground">
+        <span className="text-xs tracking-[0.2em] rotate-90 origin-center translate-y-4 uppercase">Scroll</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-muted-foreground to-transparent mt-6" />
       </div>
     </section>
   );
