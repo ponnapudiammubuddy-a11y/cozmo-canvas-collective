@@ -39,13 +39,14 @@ export function Footer() {
           <div>
             <h4 className="font-display text-lg text-foreground mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'About Us', 'Menu', 'Services', 'Gallery', 'Booking'].map((item) => (
-                <li key={item}>
-                  <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors text-sm">Home</Link></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm">About Us</Link></li>
+              <li><Link to="/menu" className="text-muted-foreground hover:text-primary transition-colors text-sm">Menu</Link></li>
+              <li><Link to="/services" className="text-muted-foreground hover:text-primary transition-colors text-sm">Services</Link></li>
+              <li><Link to="/gallery" className="text-muted-foreground hover:text-primary transition-colors text-sm">Gallery</Link></li>
+              <li><Link to="/offers" className="text-muted-foreground hover:text-primary transition-colors text-sm">Offers</Link></li>
+              <li><Link to="/booking" className="text-muted-foreground hover:text-primary transition-colors text-sm">Booking</Link></li>
+              <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm">Contact</Link></li>
             </ul>
           </div>
 
