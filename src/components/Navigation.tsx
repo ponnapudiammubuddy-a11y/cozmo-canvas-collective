@@ -9,22 +9,22 @@ const navigationItems = [
     name: 'About Us', 
     href: '/about',
     subItems: [
-      { name: 'Company Overview', href: '/about', section: 'overview' },
-      { name: 'Vision & Mission', href: '/about', section: 'vision' },
-      { name: 'Our History', href: '/about', section: 'history' },
-      { name: 'Leadership', href: '/about', section: 'leadership' },
+      { name: 'Company Overview', href: '/about/overview' },
+      { name: 'Vision & Mission', href: '/about/vision' },
+      { name: 'Our History', href: '/about/history' },
+      { name: 'Leadership', href: '/about/leadership' },
     ]
   },
   { 
     name: 'Menu', 
     href: '/menu',
     subItems: [
-      { name: 'Coffee', href: '/menu', section: 'coffee' },
-      { name: 'Beverages', href: '/menu', section: 'beverages' },
-      { name: 'Starters', href: '/menu', section: 'starters' },
-      { name: 'Main Course', href: '/menu', section: 'main' },
-      { name: 'Desserts', href: '/menu', section: 'desserts' },
-      { name: 'Chef Specials', href: '/menu', section: 'specials' },
+      { name: 'Coffee', href: '/menu/coffee' },
+      { name: 'Beverages', href: '/menu/beverages' },
+      { name: 'Starters', href: '/menu/starters' },
+      { name: 'Main Course', href: '/menu/main-course' },
+      { name: 'Desserts', href: '/menu/desserts' },
+      { name: 'Chef Specials', href: '/menu/chef-specials' },
     ]
   },
   { name: 'Services', href: '/services' },
@@ -66,28 +66,20 @@ export function Navigation() {
     }, 150);
   };
 
-  const handleSubItemClick = (href: string, section?: string) => {
+  const handleSubItemClick = (href: string) => {
     // Close dropdown with animation
     setIsClosing(true);
     setTimeout(() => {
       setActiveDropdown(null);
       setIsClosing(false);
       // Navigate to page
-      if (section) {
-        navigate(`${href}#${section}`);
-      } else {
-        navigate(href);
-      }
+      navigate(href);
     }, 100);
   };
 
-  const handleMobileSubItemClick = (href: string, section?: string) => {
+  const handleMobileSubItemClick = (href: string) => {
     setIsOpen(false);
-    if (section) {
-      navigate(`${href}#${section}`);
-    } else {
-      navigate(href);
-    }
+    navigate(href);
   };
 
   return (
@@ -175,7 +167,7 @@ export function Navigation() {
                         {item.subItems.map((subItem, index) => (
                           <button
                             key={subItem.name}
-                            onClick={() => handleSubItemClick(subItem.href, subItem.section)}
+                            onClick={() => handleSubItemClick(subItem.href)}
                             className="w-full text-left px-5 py-3 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all duration-300 relative group flex items-center gap-3"
                             style={{ 
                               animationDelay: `${index * 50}ms`,
@@ -237,7 +229,7 @@ export function Navigation() {
                         {item.subItems.map((subItem) => (
                           <button
                             key={subItem.name}
-                            onClick={() => handleMobileSubItemClick(subItem.href, subItem.section)}
+                            onClick={() => handleMobileSubItemClick(subItem.href)}
                             className="block w-full text-left py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                           >
                             {subItem.name}
