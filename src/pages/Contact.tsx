@@ -220,14 +220,14 @@ const Contact = () => {
       {/* Map */}
       <section className="h-[400px] relative">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.7!2d78.4071!3d17.4126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI0JzQ1LjQiTiA3OMKwMjQnMjUuNiJF!5e0!3m2!1sen!2sin!4v1234567890"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.5!2d78.3996!3d17.4947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91f7a5e0e4a1%3A0x1234567890abcdef!2sKPHB%20Phase%204%2C%20Kukatpally%2C%20Hyderabad%2C%20Telangana%20500072!5e0!3m2!1sen!2sin!4v1704067200000"
           width="100%"
           height="100%"
           style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Cozmo Cafe Bistro Lounge Location - Best Cafe in Banjara Hills Hyderabad Map"
+          title="Cozmo Cafe Bistro Lounge Location - KPHB 4th Phase near Lodha Bellaza Road Hyderabad Map"
           className="grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
