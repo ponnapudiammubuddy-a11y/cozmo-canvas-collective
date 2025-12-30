@@ -28,63 +28,45 @@ const OurHistory = () => {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Our Concept */}
       <Section>
         <SectionHeader 
-          label="Our Journey"
-          title="The Story So Far"
-          description="A timeline of passion, perseverance, and pursuit of excellence."
+          label="Our Concept"
+          title="What We Offer"
+          description="A unique blend of cafe culture and lounge comfort."
         />
-        <div className="max-w-4xl mx-auto">
-          <div className="relative pl-8 border-l-2 border-primary/30 space-y-12">
-            <div className="relative opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-              <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
-              <span className="text-primary font-display text-xl">2020</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">The Vision Takes Shape</h3>
-              <p className="text-muted-foreground">
-                C E Hospitality was founded with a clear vision: to create hospitality experiences 
-                that combine luxury, warmth, and impeccable service. Our founders identified a gap 
-                in the market for premium yet accessible hospitality venues.
-              </p>
-            </div>
-            <div className="relative opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-              <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
-              <span className="text-primary font-display text-xl">2021</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Cozmo Cafe Bistro Lounge Opens</h3>
-              <p className="text-muted-foreground">
-                Our flagship venue opened its doors, introducing the city to a new standard of 
-                cafe and lounge experience. The response exceeded expectations, validating our 
-                approach to premium hospitality.
-              </p>
-            </div>
-            <div className="relative opacity-0 animate-fade-up" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-              <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
-              <span className="text-primary font-display text-xl">2022</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Growing Recognition</h3>
-              <p className="text-muted-foreground">
-                Industry recognition followed as Cozmo Cafe earned its first hospitality awards. 
-                Our unique blend of atmosphere, cuisine, and service began attracting attention 
-                from investors and partners.
-              </p>
-            </div>
-            <div className="relative opacity-0 animate-fade-up" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-              <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
-              <span className="text-primary font-display text-xl">2023</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Expansion Plans Announced</h3>
-              <p className="text-muted-foreground">
-                Building on our success, we announced plans for four new hospitality projects: 
-                luxury hotels, premium resorts, specialty coffee shops, and exclusive lounges.
-              </p>
-            </div>
-            <div className="relative opacity-0 animate-fade-up" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
-              <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-foreground/30" />
-              <span className="text-muted-foreground font-display text-xl">2025 & Beyond</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">The Future Unfolds</h3>
-              <p className="text-muted-foreground">
-                With strategic expansion plans in motion, we continue to grow while maintaining 
-                our commitment to excellence that defines C E Hospitality.
-              </p>
-            </div>
+        <div className="max-w-4xl mx-auto space-y-8">
+          <div className="opacity-0 animate-fade-up border-b border-border/30 pb-8" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+            <h3 className="font-display text-xl text-foreground mb-3 flex items-center gap-3">
+              <span className="text-2xl">☕</span> Cafe Culture Meets Lounge Comfort
+            </h3>
+            <p className="text-muted-foreground">
+              A thoughtfully designed space that transitions seamlessly from daytime productivity to evening relaxation.
+            </p>
+          </div>
+          <div className="opacity-0 animate-fade-up border-b border-border/30 pb-8" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+            <h3 className="font-display text-xl text-foreground mb-3 flex items-center gap-3">
+              <span className="text-2xl">🥤</span> Fresh Food & Crafted Beverages
+            </h3>
+            <p className="text-muted-foreground">
+              From signature coffees and coolers to flavorful bites and comfort meals—every item is made to delight.
+            </p>
+          </div>
+          <div className="opacity-0 animate-fade-up border-b border-border/30 pb-8" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
+            <h3 className="font-display text-xl text-foreground mb-3 flex items-center gap-3">
+              <span className="text-2xl">💼</span> Work-Friendly Ambience
+            </h3>
+            <p className="text-muted-foreground">
+              Comfortable seating, calm lighting, and a vibe that supports focus and creativity.
+            </p>
+          </div>
+          <div className="opacity-0 animate-fade-up" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
+            <h3 className="font-display text-xl text-foreground mb-3 flex items-center gap-3">
+              <span className="text-2xl">🎵</span> Relaxed Social Atmosphere
+            </h3>
+            <p className="text-muted-foreground">
+              A place to meet, talk, celebrate, and unwind—without the rush.
+            </p>
           </div>
         </div>
       </Section>
