@@ -51,12 +51,12 @@ const CompanyOverview = () => {
           </PremiumCard>
           <PremiumCard className="text-center">
             <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h3 className="font-display text-3xl text-foreground mb-2">150+</h3>
+            <h3 className="font-display text-3xl text-foreground mb-2">30+</h3>
             <p className="text-muted-foreground">Team Members</p>
           </PremiumCard>
           <PremiumCard className="text-center">
             <Award className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h3 className="font-display text-3xl text-foreground mb-2">12</h3>
+            <h3 className="font-display text-3xl text-foreground mb-2">6</h3>
             <p className="text-muted-foreground">Industry Awards</p>
           </PremiumCard>
           <PremiumCard className="text-center">
