@@ -13,8 +13,9 @@ const slides = [
   {
     image: heroLounge,
     label: 'WHERE CONVERSATIONS BREW & IDEAS FLOW',
-    name: 'C E Hospitality\nCozmo Cafe Bistro Lounge',
+    name: '',
     tagline: 'Welcome to C E Hospitality — a modern café & lounge experience built for Hyderabad\'s vibrant minds. From casual catch-ups and coffee breaks to business meetings and late-night conversations, we\'re your go-to space to eat, work, relax, and connect.',
+    highlightTagline: true,
     cta: 'Visit Your Nearest Branch',
     ctaLink: '/contact',
     secondaryCta: 'Explore Our Menu',
@@ -195,22 +196,28 @@ export function CinematicHero() {
               {slides[currentSlide].label}
             </span>
             
-            {/* Large Elegant Headline */}
-            <h1 
-              className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground mb-6 leading-[0.95] opacity-0 animate-fade-up"
-              style={{ animationDelay: '250ms', animationFillMode: 'forwards' }}
-            >
-              {slides[currentSlide].name.split('\n').map((line, i) => (
-                <span key={i} className="block">
-                  {line}
-                </span>
-              ))}
-            </h1>
+            {/* Large Elegant Headline - only show if name exists */}
+            {slides[currentSlide].name && (
+              <h1 
+                className="font-display text-5xl md:text-7xl lg:text-8xl text-foreground mb-6 leading-[0.95] opacity-0 animate-fade-up"
+                style={{ animationDelay: '250ms', animationFillMode: 'forwards' }}
+              >
+                {slides[currentSlide].name.split('\n').map((line, i) => (
+                  <span key={i} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h1>
+            )}
             
-            {/* Premium Description */}
+            {/* Premium Description - highlighted style for first slide */}
             <p 
-              className="text-muted-foreground text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 animate-fade-up"
-              style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
+              className={`max-w-2xl mb-10 leading-relaxed opacity-0 animate-fade-up ${
+                (slides[currentSlide] as any).highlightTagline 
+                  ? 'text-foreground text-xl md:text-2xl lg:text-3xl font-medium' 
+                  : 'text-muted-foreground text-lg md:text-xl'
+              }`}
+              style={{ animationDelay: slides[currentSlide].name ? '400ms' : '250ms', animationFillMode: 'forwards' }}
             >
               {slides[currentSlide].tagline}
             </p>
