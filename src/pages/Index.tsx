@@ -9,6 +9,7 @@ import { BrandsSection } from '@/components/BrandsSection';
 import { BookingForm } from '@/components/BookingForm';
 import { Button } from '@/components/ui/button';
 import SEO, { businessSchema } from '@/components/SEO';
+import CTASection from '@/components/CTASection';
 import { 
   UtensilsCrossed, Building2, 
   Truck, PartyPopper, Target, Eye, Clock, Award,
@@ -129,6 +130,9 @@ const Index = () => {
         </div>
       </Section>
 
+      {/* Homepage CTA */}
+      <CTASection variant="homepage" />
+
       {/* Brand Structure */}
       <Section dark id="brands">
         <SectionHeader 
@@ -237,6 +241,9 @@ const Index = () => {
         </div>
       </Section>
 
+      {/* Cafe CTA */}
+      <CTASection variant="cafe" />
+
       {/* Menu Preview */}
       <Section dark id="menu">
         <SectionHeader 
@@ -280,6 +287,9 @@ const Index = () => {
           </Button>
         </div>
       </Section>
+
+      {/* Lounge CTA */}
+      <CTASection variant="lounge" />
 
       {/* Company Values */}
       <Section>
