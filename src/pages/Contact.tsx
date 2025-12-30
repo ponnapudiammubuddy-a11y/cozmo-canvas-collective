@@ -18,17 +18,17 @@ const contactSchema = {
   "mainEntity": {
     "@type": "LocalBusiness",
     "name": "Cozmo Cafe Bistro Lounge",
-    "telephone": "+91-XXXXXXXXXX",
-    "email": "info@cozmocafe.com",
+    "telephone": "+91-9703266969",
+    "email": "sam@cehospitalitygroup.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Road No. 12, Banjara Hills",
+      "streetAddress": "2nd floor, KPHB 4th phase near LODHA BELLAZA ROAD",
       "addressLocality": "Hyderabad",
       "addressRegion": "Telangana",
-      "postalCode": "500034",
+      "postalCode": "500072",
       "addressCountry": "IN"
     },
-    "openingHours": "Mo-Su 08:00-23:00"
+    "openingHours": "Mo-Su 09:00-04:00"
   }
 };
 
@@ -99,8 +99,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-medium text-foreground mb-1">Phone</h3>
-                  <a href="tel:+91XXXXXXXXXX" className="text-muted-foreground hover:text-primary transition-colors">
-                    +91-XXXXXXXXXX
+                  <a href="tel:+919703266969" className="text-muted-foreground hover:text-primary transition-colors">
+                    +91 9703266969
                   </a>
                 </div>
               </div>
@@ -110,8 +110,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-medium text-foreground mb-1">Email</h3>
-                  <a href="mailto:info@cozmocafe.com" className="text-muted-foreground hover:text-primary transition-colors">
-                    info@cozmocafe.com
+                  <a href="mailto:sam@cehospitalitygroup.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    sam@cehospitalitygroup.com
                   </a>
                 </div>
               </div>
@@ -122,8 +122,9 @@ const Contact = () => {
                 <div>
                   <h3 className="font-medium text-foreground mb-1">Address</h3>
                   <address className="text-muted-foreground not-italic">
-                    Road No. 12, Banjara Hills<br />
-                    Hyderabad, Telangana 500034
+                    COZMO CAFE BISTRO AND LOUNGE<br />
+                    2nd floor, KPHB 4th phase near LODHA BELLAZA ROAD<br />
+                    Hyderabad, Telangana 500072
                   </address>
                 </div>
               </div>
@@ -134,7 +135,7 @@ const Contact = () => {
                 <div>
                   <h3 className="font-medium text-foreground mb-1">Hours</h3>
                   <p className="text-muted-foreground">
-                    Daily: 8:00 AM – 11:00 PM
+                    Daily: 9:00 AM – 4:00 AM
                   </p>
                 </div>
               </div>
@@ -142,7 +143,7 @@ const Contact = () => {
 
             {/* WhatsApp Button */}
             <a 
-              href="https://wa.me/91XXXXXXXXXX?text=Hi, I'd like to make a reservation at Cozmo Cafe Hyderabad" 
+              href="https://wa.me/919703266969?text=Hi, I'd like to make a reservation at Cozmo Cafe Hyderabad"
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
