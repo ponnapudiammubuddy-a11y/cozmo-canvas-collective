@@ -5,6 +5,7 @@ import { PremiumCard } from '@/components/Cards';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Clock, Percent, Gift, ArrowRight } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 import dessert from '@/assets/dessert.jpg';
 import signatureCoffee from '@/assets/signature-coffee.jpg';
@@ -13,46 +14,78 @@ import chefSpecial from '@/assets/chef-special.jpg';
 const offers = [
   {
     title: 'Happy Hour Special',
-    description: 'Enjoy 20% off on all beverages from 4 PM to 7 PM, Monday to Thursday.',
+    description: 'Enjoy 20% off on all beverages from 4 PM to 7 PM, Monday to Thursday at our Hyderabad cafe.',
     discount: '20% OFF',
     image: signatureCoffee,
     validity: 'Mon - Thu, 4 PM - 7 PM',
-    terms: 'Valid for dine-in only. Cannot be combined with other offers.',
+    terms: 'Valid for dine-in only at Banjara Hills location. Cannot be combined with other offers.',
   },
   {
-    title: 'Weekend Brunch',
-    description: 'Unlimited brunch buffet with complimentary coffee. Perfect for weekend gatherings.',
+    title: 'Weekend Brunch Hyderabad',
+    description: 'Unlimited brunch buffet with complimentary coffee. Perfect for weekend gatherings with friends and family.',
     discount: 'Special Menu',
     image: chefSpecial,
     validity: 'Sat - Sun, 10 AM - 2 PM',
-    terms: 'Reservation required. Limited seating available.',
+    terms: 'Reservation required. Limited seating available at our Hyderabad outlet.',
   },
   {
     title: 'Dessert Delight',
-    description: 'Order any main course and get a dessert of your choice absolutely free.',
+    description: 'Order any main course and get a dessert of your choice absolutely free at Cozmo Cafe.',
     discount: 'FREE Dessert',
     image: dessert,
     validity: 'All Week',
-    terms: 'Valid on main courses above $25. Subject to availability.',
+    terms: 'Valid on main courses above ₹500. Subject to availability.',
   },
 ];
+
+// Offers Schema
+const offersSchema = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "name": "Cozmo Cafe Bistro Lounge Special Offers",
+  "description": "Special deals, discounts and offers at Cozmo Cafe Bistro Lounge Hyderabad",
+  "itemListElement": offers.map((offer, index) => ({
+    "@type": "Offer",
+    "position": index + 1,
+    "name": offer.title,
+    "description": offer.description,
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "LocalBusiness",
+      "name": "Cozmo Cafe Bistro Lounge",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana"
+      }
+    }
+  }))
+};
 
 const Offers = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Offers & Deals | Cozmo Cafe Bistro Lounge Hyderabad - Discounts & Specials"
+        description="Exclusive offers and deals at Cozmo Cafe Hyderabad. Happy hour discounts, weekend brunch specials, free desserts & loyalty rewards. Best cafe deals in Banjara Hills."
+        keywords="cafe offers Hyderabad, restaurant discounts, happy hour Hyderabad, weekend brunch deals, cafe loyalty program, best deals Banjara Hills, cafe coupons Hyderabad"
+        canonicalUrl="https://cozmocafe.com/offers"
+        structuredData={offersSchema}
+      />
+      
       <Navigation />
       
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-card">
         <div className="container mx-auto px-6 text-center">
           <span className="text-primary font-accent text-xl italic mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-            Special Deals
+            Special Deals in Hyderabad
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-foreground mb-6 opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
             Exclusive <span className="text-gradient-gold">Offers</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-up" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-            Discover our special promotions and enjoy premium hospitality at exceptional value.
+            Discover our special promotions and enjoy premium hospitality at exceptional value at Cozmo Cafe Hyderabad.
           </p>
         </div>
       </section>
@@ -61,11 +94,12 @@ const Offers = () => {
       <Section>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {offers.map((offer, index) => (
-            <div key={index} className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-500 group">
+            <article key={index} className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-500 group">
               <div className="relative h-48 overflow-hidden">
                 <img 
                   src={offer.image} 
-                  alt={offer.title}
+                  alt={`${offer.title} - Special offer at Cozmo Cafe Hyderabad`}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
@@ -78,11 +112,11 @@ const Offers = () => {
                 <p className="text-muted-foreground text-sm mb-4">{offer.description}</p>
                 <div className="flex items-center gap-2 text-sm text-primary mb-2">
                   <Clock className="w-4 h-4" />
-                  {offer.validity}
+                  <time>{offer.validity}</time>
                 </div>
                 <p className="text-xs text-muted-foreground">{offer.terms}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </Section>
@@ -91,21 +125,21 @@ const Offers = () => {
       <Section dark>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-primary font-accent text-lg italic mb-4 block">Rewards</span>
+            <span className="text-primary font-accent text-lg italic mb-4 block">Rewards Program Hyderabad</span>
             <h2 className="font-display text-4xl text-foreground mb-6">
               Join Our <span className="text-gradient-gold">Loyalty Program</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-6">
-              Become a valued member and unlock exclusive benefits, early access to new menu items, 
+              Become a valued member of Cozmo Cafe Hyderabad and unlock exclusive benefits, early access to new menu items, 
               birthday specials, and earn points on every visit.
             </p>
             <ul className="space-y-3 mb-8">
               {[
-                'Earn 1 point for every $1 spent',
+                'Earn 1 point for every ₹100 spent',
                 'Birthday special: Free dessert',
                 'Early access to new menu launches',
-                'Exclusive member-only events',
-                'Priority reservations'
+                'Exclusive member-only events in Hyderabad',
+                'Priority reservations at our Banjara Hills outlet'
               ].map((benefit, i) => (
                 <li key={i} className="flex items-center gap-3 text-foreground">
                   <Gift className="w-5 h-5 text-primary" />
@@ -129,8 +163,8 @@ const Offers = () => {
               <p className="text-muted-foreground text-sm">Birthday dessert</p>
             </PremiumCard>
             <PremiumCard className="col-span-2">
-              <h3 className="font-display text-xl text-foreground mb-2">500+ Members</h3>
-              <p className="text-muted-foreground text-sm">Already enjoying exclusive benefits</p>
+              <h3 className="font-display text-xl text-foreground mb-2">500+ Members in Hyderabad</h3>
+              <p className="text-muted-foreground text-sm">Already enjoying exclusive benefits at Cozmo Cafe</p>
             </PremiumCard>
           </div>
         </div>
@@ -140,7 +174,7 @@ const Offers = () => {
       <Section>
         <div className="text-center">
           <h2 className="font-display text-3xl text-foreground mb-6">
-            Ready to Experience the Best?
+            Ready to Experience the Best Cafe in Hyderabad?
           </h2>
           <Button variant="gold" size="lg" asChild>
             <Link to="/booking">Reserve Your Table <ArrowRight className="w-4 h-4 ml-2" /></Link>

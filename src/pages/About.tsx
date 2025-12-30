@@ -2,6 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Section, SectionHeader } from '@/components/Section';
 import { PremiumCard, DirectorCard, BrandCard } from '@/components/Cards';
+import SEO from '@/components/SEO';
 import { 
   Eye, Target, Clock, Award, ShieldCheck, Users, 
   TrendingUp, Building2, Coffee, TreePalm, Wine,
@@ -10,9 +11,40 @@ import {
 
 import heroLounge from '@/assets/hero-lounge.jpg';
 
+// About Page Schema
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Cozmo Cafe Bistro Lounge Hyderabad",
+  "description": "Learn about C E Hospitality and Cozmo Cafe Bistro Lounge - Hyderabad's premium cafe & lounge destination since 2020.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "C E Hospitality",
+    "foundingDate": "2020",
+    "founders": [
+      {"@type": "Person", "name": "Samuel Charles"}
+    ],
+    "numberOfEmployees": "50+",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "addressCountry": "IN"
+    }
+  }
+};
+
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="About Us | Cozmo Cafe Bistro Lounge Hyderabad - Our Story"
+        description="Discover the story of Cozmo Cafe Bistro Lounge - Hyderabad's premier cafe & lounge by C E Hospitality. Learn about our vision, mission, leadership team & commitment to excellence since 2020."
+        keywords="about Cozmo Cafe, cafe history Hyderabad, C E Hospitality, best cafe brand Hyderabad, premium lounge Hyderabad, cafe founders, restaurant story"
+        canonicalUrl="https://cozmocafe.com/about"
+        structuredData={aboutSchema}
+      />
+      
       <Navigation />
       
       {/* Hero */}
@@ -20,20 +52,20 @@ const About = () => {
         <div className="absolute inset-0">
           <img 
             src={heroLounge} 
-            alt="About C E Hospitality"
+            alt="Cozmo Cafe Bistro Lounge interior - Best cafe ambiance in Hyderabad"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
         </div>
         <div className="relative container mx-auto px-6 pt-20">
           <span className="text-primary font-accent text-xl italic mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-            About Us
+            About Cozmo Cafe Hyderabad
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-foreground mb-6 opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
             Our <span className="text-gradient-gold">Story</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl opacity-0 animate-fade-up" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-            From a vision of excellence to a thriving hospitality group, 
+            From a vision of excellence to Hyderabad's premier cafe & lounge, 
             discover the journey that shaped C E Hospitality.
           </p>
         </div>
@@ -44,15 +76,15 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           <span className="text-primary font-accent text-lg italic mb-4 block">Who We Are</span>
           <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8">
-            C E Hospitality Group
+            C E Hospitality Group - Hyderabad
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            C E Hospitality is a premier hospitality group dedicated to creating exceptional 
+            C E Hospitality is a premier hospitality group based in Hyderabad, dedicated to creating exceptional 
             experiences across dining, accommodation, and leisure. Our commitment to quality, 
             innovation, and guest satisfaction drives everything we do.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            With our flagship brand, Cozmo Cafe Bistro Lounge, currently delighting guests 
+            With our flagship brand, Cozmo Cafe Bistro Lounge, currently delighting guests in Hyderabad
             and four ambitious projects in development, we are building a comprehensive 
             hospitality portfolio that caters to diverse tastes and occasions.
           </p>
@@ -62,38 +94,38 @@ const About = () => {
       {/* History */}
       <Section dark id="history">
         <SectionHeader 
-          label="Our Journey"
+          label="Our Journey in Hyderabad"
           title="Company History"
-          description="The story of passion, perseverance, and pursuit of excellence."
+          description="The story of passion, perseverance, and pursuit of excellence in Hyderabad's hospitality scene."
         />
         <div className="max-w-4xl mx-auto">
           <div className="relative pl-8 border-l-2 border-primary/30 space-y-12">
             <div className="relative">
               <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
               <span className="text-primary font-display text-xl">2020</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">The Vision Takes Shape</h3>
+              <h3 className="font-display text-xl text-foreground mt-2 mb-3">The Vision Takes Shape in Hyderabad</h3>
               <p className="text-muted-foreground">
-                C E Hospitality was founded with a clear vision: to create hospitality experiences 
+                C E Hospitality was founded in Hyderabad with a clear vision: to create hospitality experiences 
                 that combine luxury, warmth, and impeccable service. Our founders identified a gap 
-                in the market for premium yet accessible hospitality venues.
+                in the market for premium yet accessible hospitality venues in Telangana.
               </p>
             </div>
             <div className="relative">
               <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
               <span className="text-primary font-display text-xl">2021</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Cozmo Cafe Bistro Lounge Opens</h3>
+              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Cozmo Cafe Bistro Lounge Opens in Banjara Hills</h3>
               <p className="text-muted-foreground">
-                Our flagship venue opened its doors, introducing the city to a new standard of 
-                cafe and lounge experience. The response exceeded expectations, validating our 
-                approach to premium hospitality.
+                Our flagship venue opened its doors in Banjara Hills, introducing Hyderabad to a new standard of 
+                cafe and lounge experience. The response exceeded expectations, making us one of the 
+                best cafes in Hyderabad within months.
               </p>
             </div>
             <div className="relative">
               <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-primary" />
               <span className="text-primary font-display text-xl">2023</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Expansion Plans Announced</h3>
+              <h3 className="font-display text-xl text-foreground mt-2 mb-3">Expansion Plans Across Telangana</h3>
               <p className="text-muted-foreground">
-                Building on our success, we announced plans for four new hospitality projects: 
+                Building on our success in Hyderabad, we announced plans for four new hospitality projects: 
                 luxury hotels, premium resorts, specialty coffee shops, and exclusive lounges.
               </p>
             </div>
@@ -102,7 +134,7 @@ const About = () => {
               <span className="text-muted-foreground font-display text-xl">2025 & Beyond</span>
               <h3 className="font-display text-xl text-foreground mt-2 mb-3">The Future Unfolds</h3>
               <p className="text-muted-foreground">
-                With strategic expansion plans in motion, we continue to grow while maintaining 
+                With strategic expansion plans in motion across Hyderabad and beyond, we continue to grow while maintaining 
                 our commitment to excellence that defines C E Hospitality.
               </p>
             </div>
@@ -118,10 +150,9 @@ const About = () => {
             <Eye className="w-14 h-14 text-primary mb-6" />
             <h3 className="font-display text-3xl text-foreground mb-4">Our Vision</h3>
             <p className="text-muted-foreground leading-relaxed text-lg">
-              To become a globally recognized hospitality group that sets the benchmark for 
-              excellence, innovation, and guest satisfaction. We envision a future where every 
-              C E Hospitality experience creates lasting memories and inspires a new standard 
-              in the industry.
+              To become the most loved cafe and lounge brand in Hyderabad and across India, 
+              setting the benchmark for premium hospitality, exceptional service, and 
+              unforgettable guest experiences.
             </p>
           </PremiumCard>
           <PremiumCard className="relative overflow-hidden">
@@ -129,9 +160,9 @@ const About = () => {
             <Target className="w-14 h-14 text-primary mb-6" />
             <h3 className="font-display text-3xl text-foreground mb-4">Our Mission</h3>
             <p className="text-muted-foreground leading-relaxed text-lg">
-              To deliver premium hospitality experiences through exceptional service, 
-              innovative offerings, and unwavering commitment to quality. We strive to 
-              create welcoming spaces where every guest feels valued.
+              To deliver premium cafe and lounge experiences in Hyderabad through exceptional coffee, 
+              delicious food, refreshing beverages, and warm hospitality that makes every 
+              guest feel valued and special.
             </p>
           </PremiumCard>
         </div>
@@ -142,13 +173,13 @@ const About = () => {
         <SectionHeader 
           label="Leadership"
           title="Meet Our Directors"
-          description="The visionaries and experts driving C E Hospitality's success."
+          description="The visionaries and experts driving C E Hospitality's success in Hyderabad."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <DirectorCard 
             name="Samuel Charles"
             role="Founder & CEO"
-            description="With over 15 years in luxury hospitality, Alexander leads the group's strategic vision and expansion. His passion for excellence and guest experience drives every decision."
+            description="With over 15 years in luxury hospitality, Samuel leads the group's strategic vision and expansion across Hyderabad and beyond."
           />
           <DirectorCard 
             name="Padma Vijaya"
@@ -172,7 +203,7 @@ const About = () => {
       <Section>
         <SectionHeader 
           label="Our Portfolio"
-          title="Hospitality Brands"
+          title="Hospitality Brands in Hyderabad"
           description="A growing family of premium hospitality experiences."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -180,7 +211,7 @@ const About = () => {
             name="Cozmo Cafe Bistro Lounge"
             type="Cafe & Lounge"
             status="live"
-            description="Premium coffee, artisan mocktails, gourmet cuisine, and sophisticated lounge experience."
+            description="Hyderabad's premium coffee, artisan mocktails, gourmet cuisine, and sophisticated lounge experience."
             icon={<Coffee className="w-7 h-7" />}
           />
           <BrandCard 
@@ -201,7 +232,7 @@ const About = () => {
             name="Specialty Coffee Shops"
             type="Quick Service"
             status="coming-soon"
-            description="Artisan coffee destinations in urban locations."
+            description="Artisan coffee destinations across Hyderabad."
             icon={<Coffee className="w-7 h-7" />}
           />
           <BrandCard 
@@ -219,7 +250,7 @@ const About = () => {
         <SectionHeader 
           label="Our Values"
           title="What We Stand For"
-          description="The principles that guide every aspect of our hospitality."
+          description="The principles that guide every aspect of our hospitality in Hyderabad."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <PremiumCard>
@@ -250,7 +281,7 @@ const About = () => {
         <SectionHeader 
           label="Our Standards"
           title="Rules & Responsibilities"
-          description="The operational principles that ensure consistent excellence across all venues."
+          description="The operational principles that ensure consistent excellence across all our Hyderabad venues."
         />
         <div className="grid md:grid-cols-2 gap-8">
           <div>
@@ -262,7 +293,7 @@ const About = () => {
               {[
                 'Regular sanitization of all areas',
                 'Staff health monitoring protocols',
-                'Food safety certification compliance',
+                'FSSAI food safety certification compliance',
                 'Emergency response procedures',
                 'Guest safety as top priority'
               ].map((item, i) => (
