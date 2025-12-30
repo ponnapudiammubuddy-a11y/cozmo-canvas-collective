@@ -163,8 +163,8 @@ const Offers = () => {
               <p className="text-muted-foreground text-sm">Birthday dessert</p>
             </PremiumCard>
             <PremiumCard className="col-span-2">
-              <h3 className="font-display text-xl text-foreground mb-2">500+ Members in Hyderabad</h3>
-              <p className="text-muted-foreground text-sm">Already enjoying exclusive benefits at Cozmo Cafe</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Opening January 2026</h3>
+              <p className="text-muted-foreground text-sm">Be among the first to experience premium hospitality at Cozmo Cafe Hyderabad – where great taste meets great moments!</p>
             </PremiumCard>
           </div>
         </div>
