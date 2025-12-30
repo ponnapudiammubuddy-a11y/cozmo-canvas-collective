@@ -34,14 +34,12 @@ const CompanyOverview = () => {
       <Section>
         <div className="max-w-4xl mx-auto text-center mb-16">
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            C E Hospitality is a premier hospitality group dedicated to creating exceptional 
-            experiences across dining, accommodation, and leisure. Our commitment to quality, 
-            innovation, and guest satisfaction drives everything we do.
+            C E Hospitality is a startup hospitality brand driven by a simple belief: great stays come from 
+            thoughtful details and authentic service. We combine modern design, smart operations, and a 
+            guest-first mindset to deliver reliable, high-quality experiences—every time.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            With our flagship brand, Cozmo Cafe Bistro Lounge, currently delighting guests 
-            and four ambitious projects in development, we are building a comprehensive 
-            hospitality portfolio that caters to diverse tastes and occasions.
+            Whether you're visiting for work or leisure, we focus on what matters most: comfort, cleanliness, and care.
           </p>
         </div>
 
