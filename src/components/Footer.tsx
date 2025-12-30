@@ -103,7 +103,7 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 C E Hospitality. All rights reserved.
+            © 2026 C E Hospitality. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
