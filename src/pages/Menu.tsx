@@ -5,7 +5,8 @@ import { Section } from '@/components/Section';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import { generateMenuPdf } from '@/lib/generateMenuPdf';
+import { toast } from 'sonner';
 // Import beverage category images
 import classicHotImg from '@/assets/menu/classic-hot.jpg';
 import cafeSpecialHotImg from '@/assets/menu/cafe-special-hot.jpg';
@@ -509,7 +510,14 @@ const Menu = () => {
             discover our carefully curated selection of beverages and food.
           </p>
           <div className="opacity-0 animate-fade-up" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-            <Button variant="gold-outline" size="lg">
+            <Button 
+              variant="gold-outline" 
+              size="lg"
+              onClick={() => {
+                generateMenuPdf(menuData);
+                toast.success('Menu PDF downloaded successfully!');
+              }}
+            >
               <Download className="w-4 h-4 mr-2" />
               Download PDF Menu
             </Button>
