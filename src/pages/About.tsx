@@ -201,10 +201,10 @@ const About = () => {
       <Section>
         <SectionHeader 
           label="Our Portfolio"
-          title="Hospitality Brands in Hyderabad"
+          title="Our Brands"
           description="A growing family of premium hospitality experiences."
         />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <BrandCard 
             name="Cozmo Cafe Bistro Lounge"
             type="Cafe & Lounge"
@@ -213,30 +213,23 @@ const About = () => {
             icon={<Coffee className="w-7 h-7" />}
           />
           <BrandCard 
-            name="Luxury Hotels"
-            type="Hospitality"
-            status="coming-soon"
-            description="World-class accommodations with exceptional comfort and service."
-            icon={<Building2 className="w-7 h-7" />}
+            name="Cafes"
+            type="Dining"
+            status="live"
+            description="Modern cafe experiences with quality food and beverages."
+            icon={<Coffee className="w-7 h-7" />}
           />
           <BrandCard 
-            name="Premium Resorts"
+            name="Resorts"
             type="Leisure"
-            status="coming-soon"
+            status="live"
             description="Destination retreats offering relaxation and adventure."
             icon={<TreePalm className="w-7 h-7" />}
           />
           <BrandCard 
-            name="Specialty Coffee Shops"
-            type="Quick Service"
-            status="coming-soon"
-            description="Artisan coffee destinations across Hyderabad."
-            icon={<Coffee className="w-7 h-7" />}
-          />
-          <BrandCard 
-            name="Exclusive Lounges"
+            name="Lounges"
             type="Entertainment"
-            status="coming-soon"
+            status="live"
             description="Sophisticated venues with premium beverages and entertainment."
             icon={<Wine className="w-7 h-7" />}
           />
