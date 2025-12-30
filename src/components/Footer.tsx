@@ -80,19 +80,19 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
-                <span className="text-muted-foreground text-sm">123 Luxury Boulevard, Downtown District, City 12345</span>
+                <span className="text-muted-foreground text-sm">COZMO CAFE BISTRO AND LOUNGE, 2nd floor, KPHB 4th phase near LODHA BELLAZA ROAD, Hyderabad, Telangana. 500072</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors text-sm">+123 456 7890</a>
+                <a href="tel:+919703266969" className="text-muted-foreground hover:text-primary transition-colors text-sm">+91 9703266969</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:info@cehospitality.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">info@cehospitality.com</a>
+                <a href="mailto:sam@cehospitalitygroup.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">sam@cehospitalitygroup.com</a>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground text-sm">Daily: 8:00 AM – 11:00 PM</span>
+                <span className="text-muted-foreground text-sm">Daily: 9:00 AM – 4:00 AM</span>
               </li>
             </ul>
           </div>
