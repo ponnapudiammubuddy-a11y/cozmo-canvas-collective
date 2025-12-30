@@ -8,6 +8,7 @@ import { DirectorCard, ServiceCard, MenuItemCard, PremiumCard } from '@/componen
 import { BrandsSection } from '@/components/BrandsSection';
 import { BookingForm } from '@/components/BookingForm';
 import { Button } from '@/components/ui/button';
+import SEO, { businessSchema } from '@/components/SEO';
 import { 
   UtensilsCrossed, Building2, 
   Truck, PartyPopper, Target, Eye, Clock, Award,
@@ -32,12 +33,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Cozmo Cafe Bistro Lounge | Best Cafe & Lounge in Hyderabad"
+        description="Visit Cozmo Cafe Bistro Lounge - Hyderabad's premium cafe & lounge. Enjoy artisan coffee, gourmet food, mocktails, live music & cozy hangout space. Perfect for couples, friends & families near Banjara Hills."
+        keywords="best cafe in Hyderabad, best lounge in Hyderabad, cafe lounge Hyderabad, coffee shop near me, cafe near me, lounge near me, hangout places Hyderabad, romantic cafe Hyderabad, Banjara Hills cafe"
+        canonicalUrl="https://cozmocafe.com/"
+        structuredData={businessSchema}
+      />
+      
       {/* Floating Reserve Button */}
       <Link
         to="/booking"
         className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-semibold ${
           showFloatingButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
+        aria-label="Reserve a table at Cozmo Cafe Hyderabad"
       >
         <CalendarCheck className="w-5 h-5" />
         Reserve Table
@@ -47,23 +57,24 @@ const Index = () => {
       {/* Cinematic Hero with Integrated Slider */}
       <CinematicHero />
 
-      {/* Company Overview */}
+      {/* Company Overview - About Section */}
       <Section id="overview">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-primary font-accent text-lg italic mb-4 block">About Us</span>
+            <span className="text-primary font-accent text-lg italic mb-4 block">About Cozmo Cafe Hyderabad</span>
             <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
-              Redefining <span className="text-gradient-gold">Premium Hospitality</span>
+              Best <span className="text-gradient-gold">Cafe & Lounge</span> in Hyderabad
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              C E Hospitality stands as a beacon of excellence in the hospitality industry. 
-              We are committed to creating memorable experiences through exceptional dining, 
-              premium cafés, sophisticated lounges, and world-class accommodations.
+              Welcome to Cozmo Cafe Bistro Lounge – Hyderabad's premier destination for premium coffee, 
+              gourmet cuisine, refreshing beverages, and a sophisticated lounge experience. Located in 
+              the heart of the city, we're the perfect hangout spot for youth, couples, friends, and families.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              With our flagship brand, Cozmo Cafe Bistro Lounge, currently operational and 
-              four additional hospitality projects in development, we are building a legacy 
-              of quality, innovation, and unparalleled guest experiences.
+              Experience the finest artisan coffee, handcrafted mocktails, delicious snacks, and 
+              exceptional meals in our cozy, modern ambiance. Whether you're looking for a romantic 
+              date night cafe, a fun hangout with friends, or a family-friendly restaurant in Hyderabad, 
+              Cozmo Cafe is your perfect choice.
             </p>
             <div className="flex flex-wrap gap-8 mb-8">
               <div>
@@ -85,10 +96,30 @@ const Index = () => {
           </div>
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
-              <img src={signatureCoffee} alt="Signature Coffee" className="rounded-xl h-64 w-full object-cover" />
-              <img src={mocktail} alt="Artisan Mocktail" className="rounded-xl h-64 w-full object-cover mt-8" />
-              <img src={dessert} alt="Premium Dessert" className="rounded-xl h-64 w-full object-cover -mt-8" />
-              <img src={chefSpecial} alt="Chef Special" className="rounded-xl h-64 w-full object-cover" />
+              <img 
+                src={signatureCoffee} 
+                alt="Best signature coffee at Cozmo Cafe Hyderabad" 
+                className="rounded-xl h-64 w-full object-cover"
+                loading="lazy"
+              />
+              <img 
+                src={mocktail} 
+                alt="Refreshing mocktails at premium lounge in Hyderabad" 
+                className="rounded-xl h-64 w-full object-cover mt-8"
+                loading="lazy"
+              />
+              <img 
+                src={dessert} 
+                alt="Delicious desserts at Cozmo Cafe Bistro Lounge" 
+                className="rounded-xl h-64 w-full object-cover -mt-8"
+                loading="lazy"
+              />
+              <img 
+                src={chefSpecial} 
+                alt="Chef special gourmet dishes at best restaurant Hyderabad" 
+                className="rounded-xl h-64 w-full object-cover"
+                loading="lazy"
+              />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-primary text-primary-foreground p-6 rounded-xl shadow-lg">
               <p className="font-accent text-lg italic">Crafted with Passion</p>
@@ -103,7 +134,7 @@ const Index = () => {
         <SectionHeader 
           label="Our Portfolio"
           title="Building a Hospitality Empire"
-          description="From cafés to resorts, we're expanding our vision across multiple hospitality segments."
+          description="From cafés to resorts, we're expanding our vision across multiple hospitality segments in Hyderabad and beyond."
         />
         <BrandsSection />
       </Section>
@@ -116,10 +147,9 @@ const Index = () => {
             <Eye className="w-12 h-12 text-primary mb-6" />
             <h3 className="font-display text-2xl text-foreground mb-4">Our Vision</h3>
             <p className="text-muted-foreground leading-relaxed">
-              To become a globally recognized hospitality group that sets the benchmark for 
-              excellence, innovation, and guest satisfaction. We envision a future where every 
-              C E Hospitality experience creates lasting memories and inspires a new standard 
-              in the industry.
+              To become the most loved cafe and lounge brand in Hyderabad and beyond, 
+              setting the benchmark for premium hospitality, exceptional service, and 
+              unforgettable guest experiences.
             </p>
           </PremiumCard>
           <PremiumCard className="relative overflow-hidden">
@@ -127,10 +157,9 @@ const Index = () => {
             <Target className="w-12 h-12 text-primary mb-6" />
             <h3 className="font-display text-2xl text-foreground mb-4">Our Mission</h3>
             <p className="text-muted-foreground leading-relaxed">
-              To deliver premium hospitality experiences through exceptional service, 
-              innovative offerings, and unwavering commitment to quality. We strive to 
-              create welcoming spaces where every guest feels valued, every meal delights, 
-              and every moment becomes a cherished memory.
+              To deliver premium cafe and lounge experiences through exceptional coffee, 
+              delicious food, refreshing beverages, and warm hospitality that makes every 
+              guest feel special at our Hyderabad location.
             </p>
           </PremiumCard>
         </div>
@@ -170,39 +199,39 @@ const Index = () => {
       {/* Services */}
       <Section id="services">
         <SectionHeader 
-          label="What We Offer"
-          title="Exceptional Services"
-          description="From intimate dinners to grand celebrations, we cater to every occasion."
+          label="Our Services in Hyderabad"
+          title="What We Offer"
+          description="From coffee and snacks to fine dining and lounge experiences - we cater to every occasion."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ServiceCard 
-            title="Dine-In Experience"
-            description="Immerse yourself in our elegant ambiance with attentive service and exquisite cuisine."
+            title="Premium Dine-In"
+            description="Experience our elegant cafe and lounge ambiance with attentive service, perfect for couples and families in Hyderabad."
             icon={<UtensilsCrossed className="w-6 h-6" />}
           />
           <ServiceCard 
             title="Takeaway & Delivery"
-            description="Enjoy our premium offerings in the comfort of your home with our swift delivery service."
+            description="Enjoy Cozmo Cafe's premium coffee and food delivered to your doorstep across Hyderabad."
             icon={<Truck className="w-6 h-6" />}
           />
           <ServiceCard 
-            title="Event Catering"
-            description="Elevate your events with our professional catering services and customized menus."
+            title="Party & Event Catering"
+            description="Elevate your celebrations with our professional catering services for birthdays, anniversaries, and corporate events."
             icon={<PartyPopper className="w-6 h-6" />}
           />
           <ServiceCard 
             title="Private Dining"
-            description="Exclusive private spaces for intimate gatherings and special celebrations."
+            description="Exclusive private spaces for romantic dinners, intimate gatherings, and special celebrations in Hyderabad."
             icon={<Users className="w-6 h-6" />}
           />
           <ServiceCard 
             title="Live Entertainment"
-            description="Weekend nights come alive with live music and curated entertainment."
+            description="Weekend nights come alive with live music and curated entertainment at our lounge in Hyderabad."
             icon={<Sparkles className="w-6 h-6" />}
           />
           <ServiceCard 
             title="Corporate Events"
-            description="Professional venues for business meetings, launches, and corporate gatherings."
+            description="Professional venue for business meetings, product launches, and corporate gatherings in Hyderabad."
             icon={<Building2 className="w-6 h-6" />}
           />
         </div>
@@ -213,34 +242,34 @@ const Index = () => {
         <SectionHeader 
           label="Our Menu"
           title="Taste the Excellence"
-          description="A curated selection of our signature offerings crafted by master chefs."
+          description="A curated selection of artisan coffee, mocktails, gourmet dishes, and desserts."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <MenuItemCard 
             name="Signature Latte"
             description="Single-origin espresso with velvety steamed milk and artisan latte art."
-            price="$6.50"
+            price="₹250"
             image={signatureCoffee}
             category="Coffee"
           />
           <MenuItemCard 
             name="Sunset Spritzer"
             description="Refreshing blend of citrus, passion fruit, and sparkling soda."
-            price="$8.00"
+            price="₹320"
             image={mocktail}
             category="Mocktails"
           />
           <MenuItemCard 
             name="Tiramisu Royale"
             description="Classic Italian dessert with espresso-soaked ladyfingers and mascarpone."
-            price="$12.00"
+            price="₹380"
             image={dessert}
             category="Desserts"
           />
           <MenuItemCard 
             name="Grilled Tenderloin"
             description="Premium beef tenderloin with red wine reduction and seasonal vegetables."
-            price="$32.00"
+            price="₹850"
             image={chefSpecial}
             category="Chef Special"
           />
@@ -255,30 +284,30 @@ const Index = () => {
       {/* Company Values */}
       <Section>
         <SectionHeader 
-          label="Our Standards"
-          title="Commitment to Excellence"
-          description="The principles that guide every aspect of our hospitality."
+          label="Why Choose Cozmo Cafe"
+          title="Our Promise to You"
+          description="What makes us the best cafe and lounge in Hyderabad."
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <PremiumCard>
             <ShieldCheck className="w-10 h-10 text-primary mb-4" />
-            <h3 className="font-display text-lg text-foreground mb-2">Hygiene & Safety</h3>
+            <h3 className="font-display text-lg text-foreground mb-2">Hygiene First</h3>
             <p className="text-muted-foreground text-sm">Rigorous standards ensuring the highest levels of cleanliness and food safety.</p>
           </PremiumCard>
           <PremiumCard>
             <Award className="w-10 h-10 text-primary mb-4" />
-            <h3 className="font-display text-lg text-foreground mb-2">Quality Control</h3>
-            <p className="text-muted-foreground text-sm">Continuous improvement processes to maintain and exceed quality standards.</p>
+            <h3 className="font-display text-lg text-foreground mb-2">Premium Quality</h3>
+            <p className="text-muted-foreground text-sm">Only the finest ingredients in our coffee, food, and beverages.</p>
           </PremiumCard>
           <PremiumCard>
             <Clock className="w-10 h-10 text-primary mb-4" />
-            <h3 className="font-display text-lg text-foreground mb-2">Timely Service</h3>
-            <p className="text-muted-foreground text-sm">Efficient operations ensuring prompt service without compromising quality.</p>
+            <h3 className="font-display text-lg text-foreground mb-2">Prompt Service</h3>
+            <p className="text-muted-foreground text-sm">Efficient operations ensuring quick service without compromising quality.</p>
           </PremiumCard>
           <PremiumCard>
             <TrendingUp className="w-10 h-10 text-primary mb-4" />
-            <h3 className="font-display text-lg text-foreground mb-2">Innovation</h3>
-            <p className="text-muted-foreground text-sm">Constantly evolving our offerings to bring fresh experiences to our guests.</p>
+            <h3 className="font-display text-lg text-foreground mb-2">Cozy Ambiance</h3>
+            <p className="text-muted-foreground text-sm">Modern, comfortable lounge setting perfect for relaxation and socializing.</p>
           </PremiumCard>
         </div>
       </Section>
@@ -287,18 +316,18 @@ const Index = () => {
       <Section dark id="booking">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-primary font-accent text-lg italic mb-4 block">Reservations</span>
+            <span className="text-primary font-accent text-lg italic mb-4 block">Book a Table in Hyderabad</span>
             <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
               Reserve Your <span className="text-gradient-gold">Experience</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Whether it's an intimate dinner, a celebration, or a business meeting, 
-              our team is ready to create an unforgettable experience for you.
+              Whether you're planning a romantic date night, birthday celebration, friends hangout, 
+              or family dinner in Hyderabad, our team is ready to create an unforgettable experience.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-foreground">123 Luxury Boulevard, Downtown District</span>
+                <address className="text-foreground not-italic">Road No. 12, Banjara Hills, Hyderabad, Telangana</address>
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-primary" />
@@ -315,14 +344,14 @@ const Index = () => {
       {/* Map Section */}
       <section className="h-[400px] relative">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2176767641476!2d-73.98823908459375!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1623456789012!5m2!1sen!2sus"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.7!2d78.4071!3d17.4126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI0JzQ1LjQiTiA3OMKwMjQnMjUuNiJF!5e0!3m2!1sen!2sin!4v1234567890"
           width="100%"
           height="100%"
           style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Our Location"
+          title="Cozmo Cafe Bistro Lounge Location - Best Cafe in Banjara Hills Hyderabad"
           className="grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
