@@ -43,29 +43,19 @@ const Leadership = () => {
             description="With over 15 years in luxury hospitality, Alexander leads the group's strategic vision and expansion. His passion for excellence and guest experience drives every decision."
           />
           <DirectorCard 
-            name="Victoria Ellis"
+            name="Padma Vijaya"
             role="Director of Operations"
-            description="Victoria ensures seamless operations across all venues. Her expertise in hospitality management guarantees consistent quality and service excellence."
+            description="Padma ensures seamless operations across all venues. Her expertise in hospitality management guarantees consistent quality and service excellence."
           />
           <DirectorCard 
-            name="Marcus Williams"
+            name="Sidhaartha"
             role="Culinary Director"
-            description="An award-winning chef bringing innovative cuisine and exceptional dining experiences. Marcus curates our menus with creativity and precision."
+            description="An award-winning chef bringing innovative cuisine and exceptional dining experiences. Sidhaartha curates our menus with creativity and precision."
           />
           <DirectorCard 
-            name="Sarah Mitchell"
+            name="Vidya Sagar"
             role="Brand Director"
-            description="Sarah shapes the visual identity and guest experience across all C E Hospitality brands, ensuring consistency and memorable impressions."
-          />
-          <DirectorCard 
-            name="David Park"
-            role="Finance Director"
-            description="David oversees financial strategy and sustainable growth, ensuring the group's long-term success and stability."
-          />
-          <DirectorCard 
-            name="Emma Roberts"
-            role="HR Director"
-            description="Emma builds and nurtures our team culture, ensuring we attract and retain the best talent in hospitality."
+            description="Vidya shapes the visual identity and guest experience across all C E Hospitality brands, ensuring consistency and memorable impressions."
           />
         </div>
       </Section>
