@@ -110,13 +110,13 @@ export function Navigation() {
               <Phone className="w-4 h-4" />
               <span>+9703266969</span>
             </a>
-            <a href="mailto:info@cehospitality.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href="mailto:sam@cehospitalitygroup.com" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="w-4 h-4" />
-              <span>info@cehospitality.com</span>
+              <span>sam@cehospitalitygroup.com</span>
             </a>
           </div>
           <div className="text-muted-foreground">
-            Open Daily: 8:00 AM – 11:00 PM
+            Open Daily: 9:00 AM – 4:00 AM
           </div>
         </div>
       </div>
