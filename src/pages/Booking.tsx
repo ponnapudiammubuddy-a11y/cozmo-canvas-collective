@@ -19,13 +19,13 @@ const bookingSchema = {
     "name": "Cozmo Cafe Bistro Lounge",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Road No. 12, Banjara Hills",
+      "streetAddress": "2nd floor, KPHB 4th phase near LODHA BELLAZA ROAD",
       "addressLocality": "Hyderabad",
       "addressRegion": "Telangana",
-      "postalCode": "500034",
+      "postalCode": "500072",
       "addressCountry": "IN"
     },
-    "telephone": "+91-XXXXXXXXXX",
+    "telephone": "+91-9703266969",
     "acceptsReservations": true
   }
 };
@@ -73,8 +73,8 @@ const Booking = () => {
                 <Phone className="w-6 h-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium text-foreground">Call Us</h3>
-                  <a href="tel:+91XXXXXXXXXX" className="text-muted-foreground hover:text-primary transition-colors">
-                    +91-XXXXXXXXXX
+                  <a href="tel:+919703266969" className="text-muted-foreground hover:text-primary transition-colors">
+                    +91 9703266969
                   </a>
                 </div>
               </div>
@@ -82,8 +82,8 @@ const Booking = () => {
                 <Mail className="w-6 h-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium text-foreground">Email Us</h3>
-                  <a href="mailto:reservations@cozmocafe.com" className="text-muted-foreground hover:text-primary transition-colors">
-                    reservations@cozmocafe.com
+                  <a href="mailto:sam@cehospitalitygroup.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    sam@cehospitalitygroup.com
                   </a>
                 </div>
               </div>
@@ -91,7 +91,7 @@ const Booking = () => {
                 <Clock className="w-6 h-6 text-primary mt-1" />
                 <div>
                   <h3 className="font-medium text-foreground">Opening Hours</h3>
-                  <p className="text-muted-foreground">Daily: 8:00 AM – 11:00 PM</p>
+                  <p className="text-muted-foreground">Daily: 9:00 AM – 4:00 AM</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl">
@@ -99,8 +99,9 @@ const Booking = () => {
                 <div>
                   <h3 className="font-medium text-foreground">Location</h3>
                   <address className="text-muted-foreground not-italic">
-                    Road No. 12, Banjara Hills<br />
-                    Hyderabad, Telangana 500034
+                    COZMO CAFE BISTRO AND LOUNGE<br />
+                    2nd floor, KPHB 4th phase near LODHA BELLAZA ROAD<br />
+                    Hyderabad, Telangana 500072
                   </address>
                 </div>
               </div>
