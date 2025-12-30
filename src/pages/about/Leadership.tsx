@@ -38,7 +38,7 @@ const Leadership = () => {
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <DirectorCard 
-            name="Alexander Chen"
+            name="Samuel Charles"
             role="Founder & CEO"
             description="With over 15 years in luxury hospitality, Alexander leads the group's strategic vision and expansion. His passion for excellence and guest experience drives every decision."
           />
