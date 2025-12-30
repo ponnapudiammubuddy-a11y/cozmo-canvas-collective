@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
-import { Section } from '@/components/Section';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Download, Search, X, Coffee, UtensilsCrossed, Cake, ChefHat, Salad, ChevronDown, Star } from 'lucide-react';
+import { Download, Search, X, Coffee, UtensilsCrossed, Cake, ChefHat, Salad, ChevronDown, Star, Sparkles } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { generateMenuPdf } from '@/lib/generateMenuPdf';
 import { toast } from 'sonner';
@@ -530,6 +529,61 @@ const menuData: MainCategory[] = [
   },
 ];
 
+// Featured items for showcase section - curated selection
+const featuredItems = [
+  {
+    id: 'featured-cappuccino',
+    name: 'Cappuccino',
+    category: 'Classic Hot',
+    image: classicHotImg,
+    description: 'Rich espresso with velvety steamed milk foam',
+    tag: 'Bestseller',
+  },
+  {
+    id: 'featured-hazelnut-latte',
+    name: 'Hazelnut Latte',
+    category: 'Café Special',
+    image: cafeSpecialHotImg,
+    description: 'Aromatic hazelnut infused with creamy espresso',
+    tag: 'Signature',
+  },
+  {
+    id: 'featured-matcha-latte',
+    name: 'Matcha Latte',
+    category: 'Matcha',
+    image: matchaImg,
+    description: 'Premium Japanese matcha with smooth oat milk',
+    tag: 'Must Try',
+  },
+  {
+    id: 'featured-tiramisu',
+    name: 'Classic Tiramisu',
+    category: 'Desserts',
+    image: dessertsImg,
+    description: 'Authentic Italian layered coffee dessert',
+    price: '₹249',
+    tag: 'Chef\'s Pick',
+  },
+  {
+    id: 'featured-chicken-steak',
+    name: 'Chicken Steak',
+    category: 'Chef Special',
+    image: chefSpecialImg,
+    description: 'Tender chicken with red wine reduction sauce',
+    price: '₹399',
+    tag: 'Premium',
+  },
+  {
+    id: 'featured-pizza',
+    name: 'Chicken Pepperoni',
+    category: 'Pizza',
+    image: pizzasImg,
+    description: 'Wood-fired pizza with premium pepperoni',
+    price: '₹429',
+    tag: 'Popular',
+  },
+];
+
 // Flatten for PDF generation (keep original format)
 const flatMenuData = menuData.flatMap(main => 
   main.subcategories.map(sub => ({
@@ -567,36 +621,56 @@ const menuSchema = {
 };
 
 const Menu = () => {
-  const [activeMainCategory, setActiveMainCategory] = useState<string>('beverages');
-  const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
-  const currentMainCategory = menuData.find(cat => cat.id === activeMainCategory);
+  // Get all subcategories for the full menu
+  const allSubcategories = useMemo(() => {
+    return menuData.flatMap(main => 
+      main.subcategories.map(sub => ({
+        ...sub,
+        mainCategory: main.name,
+        mainCategoryId: main.id,
+        mainIcon: main.icon,
+      }))
+    );
+  }, []);
 
+  // Filter subcategories based on search
   const filteredSubcategories = useMemo(() => {
-    if (!currentMainCategory) return [];
-    if (!searchQuery.trim()) return currentMainCategory.subcategories;
+    if (!searchQuery.trim()) return allSubcategories;
     
     const query = searchQuery.toLowerCase();
-    return currentMainCategory.subcategories
+    return allSubcategories
       .map(sub => ({
         ...sub,
-        items: sub.items.filter(item => item.name.toLowerCase().includes(query))
+        items: sub.items.filter(item => 
+          item.name.toLowerCase().includes(query) || 
+          sub.name.toLowerCase().includes(query)
+        )
       }))
       .filter(sub => sub.items.length > 0);
-  }, [currentMainCategory, searchQuery]);
+  }, [allSubcategories, searchQuery]);
 
-  const handleMainCategoryClick = (categoryId: string) => {
-    setActiveMainCategory(categoryId);
-    setActiveSubCategory(null);
-    setSearchQuery('');
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => {
+      const next = new Set(prev);
+      if (next.has(categoryId)) {
+        next.delete(categoryId);
+      } else {
+        next.add(categoryId);
+      }
+      return next;
+    });
   };
 
-  const handleSubCategoryClick = (subId: string) => {
-    setActiveSubCategory(activeSubCategory === subId ? null : subId);
+  const expandAll = () => {
+    setExpandedCategories(new Set(allSubcategories.map(sub => sub.id)));
   };
 
-  const isChefSpecials = activeMainCategory === 'chef-specials';
+  const collapseAll = () => {
+    setExpandedCategories(new Set());
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -611,15 +685,14 @@ const Menu = () => {
       <Navigation />
       
       {/* Hero Section - Minimal & Elegant */}
-      <section className="relative pt-24 pb-8 bg-gradient-to-b from-card to-background overflow-hidden">
-        {/* Subtle background glow */}
+      <section className="relative pt-24 pb-6 bg-gradient-to-b from-card to-background overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-6 text-center relative z-10">
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4 opacity-0 animate-fade-up" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-3 opacity-0 animate-fade-up" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
             Our <span className="text-gradient-gold">Menu</span>
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-6 opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mb-5 opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
             A curated selection of artisanal beverages and culinary delights
           </p>
           
@@ -632,7 +705,7 @@ const Menu = () => {
                 placeholder="Search our menu..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-10 py-2.5 h-11 bg-card/50 backdrop-blur-sm border-border/50 text-foreground placeholder:text-muted-foreground rounded-full text-sm focus:border-primary/50 focus:ring-primary/20"
+                className="pl-10 pr-10 py-2.5 h-10 bg-card/50 backdrop-blur-sm border-border/50 text-foreground placeholder:text-muted-foreground rounded-full text-sm focus:border-primary/50 focus:ring-primary/20"
               />
               {searchQuery && (
                 <button
@@ -650,270 +723,261 @@ const Menu = () => {
                 generateMenuPdf(flatMenuData);
                 toast.success('Menu PDF downloaded!');
               }}
-              className="h-11 px-5 rounded-full border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50 whitespace-nowrap"
+              className="h-10 px-4 rounded-full border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50 whitespace-nowrap text-sm"
             >
               <Download className="w-4 h-4 mr-2" />
-              Download PDF
+              PDF
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Main Category Navigation - Sleek Pill Style */}
-      <section className="sticky top-20 z-40 bg-background/95 backdrop-blur-xl border-b border-border/30">
-        <div className="container mx-auto px-4 py-4">
-          {/* Desktop: Centered tabs */}
-          <nav className="hidden md:flex justify-center gap-2">
-            {menuData.map((category) => {
-              const Icon = category.icon;
-              const isActive = activeMainCategory === category.id;
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => handleMainCategoryClick(category.id)}
-                  className={cn(
-                    "group relative flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300",
-                    isActive 
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30" 
-                      : "bg-card/50 text-muted-foreground hover:text-foreground hover:bg-card border border-border/30 hover:border-border/60"
-                  )}
+      {/* SECTION 1: Featured Showcase */}
+      {!searchQuery && (
+        <section className="py-8 bg-gradient-to-b from-background to-card/30">
+          <div className="container mx-auto px-4">
+            {/* Section Header */}
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <h2 className="font-display text-2xl md:text-3xl text-foreground">
+                Featured <span className="text-primary">Selections</span>
+              </h2>
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            
+            {/* Featured Cards Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+              {featuredItems.map((item, idx) => (
+                <div
+                  key={item.id}
+                  className="group relative rounded-xl overflow-hidden bg-card/50 backdrop-blur-sm border border-border/30 hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 opacity-0 animate-fade-up"
+                  style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'forwards' }}
                 >
-                  <Icon className={cn("w-4 h-4 transition-transform duration-300", isActive && "scale-110")} />
-                  <span>{category.name}</span>
-                  {category.id === 'chef-specials' && (
-                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full animate-pulse" />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-          
-          {/* Mobile: Horizontal scroll with snap */}
-          <nav className="md:hidden flex gap-2 overflow-x-auto scrollbar-hide pb-1 snap-x snap-mandatory -mx-4 px-4">
-            {menuData.map((category) => {
-              const Icon = category.icon;
-              const isActive = activeMainCategory === category.id;
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => handleMainCategoryClick(category.id)}
-                  className={cn(
-                    "relative flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 whitespace-nowrap flex-shrink-0 snap-start",
-                    isActive 
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30" 
-                      : "bg-card/50 text-muted-foreground border border-border/30"
-                  )}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{category.name}</span>
-                </button>
-              );
-            })}
-          </nav>
-        </div>
-      </section>
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                    
+                    {/* Tag */}
+                    <div className="absolute top-2 right-2">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/90 text-primary-foreground text-[10px] font-semibold backdrop-blur-sm">
+                        <Star className="w-2.5 h-2.5 fill-current" />
+                        {item.tag}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-3">
+                    <p className="text-[10px] text-primary/80 font-medium uppercase tracking-wider mb-0.5">
+                      {item.category}
+                    </p>
+                    <h3 className="font-display text-sm text-foreground mb-1 line-clamp-1 group-hover:text-primary transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-[11px] text-muted-foreground line-clamp-2 leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.price && (
+                      <p className="mt-2 text-sm font-semibold text-primary">{item.price}</p>
+                    )}
+                  </div>
+                  
+                  {/* Gold border glow on hover */}
+                  <div className="absolute inset-0 rounded-xl border-2 border-primary/0 group-hover:border-primary/30 transition-colors duration-500 pointer-events-none" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
-      {/* Category Description */}
-      {currentMainCategory && (
-        <div className="container mx-auto px-6 py-6">
-          <p className="text-center text-muted-foreground text-sm md:text-base max-w-xl mx-auto">
-            {currentMainCategory.description}
-          </p>
+      {/* Divider */}
+      {!searchQuery && (
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-4 py-4">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            <span className="text-xs text-muted-foreground uppercase tracking-widest">Full Menu</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          </div>
         </div>
       )}
 
-      {/* Menu Content */}
-      <div className="container mx-auto px-4 pb-12">
-        {filteredSubcategories.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-lg text-muted-foreground mb-4">No items found for "{searchQuery}"</p>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => setSearchQuery('')}
-              className="rounded-full"
-            >
-              Clear Search
-            </Button>
+      {/* SECTION 2: Full Detailed Menu - Accordion Style */}
+      <section className="pb-16">
+        <div className="container mx-auto px-4">
+          {/* Expand/Collapse Controls */}
+          <div className="flex items-center justify-between mb-4 max-w-4xl mx-auto">
+            <p className="text-sm text-muted-foreground">
+              {filteredSubcategories.length} categories • {filteredSubcategories.reduce((acc, sub) => acc + sub.items.length, 0)} items
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={expandAll}
+                className="text-xs h-8 text-muted-foreground hover:text-foreground"
+              >
+                Expand All
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={collapseAll}
+                className="text-xs h-8 text-muted-foreground hover:text-foreground"
+              >
+                Collapse All
+              </Button>
+            </div>
           </div>
-        ) : isChefSpecials ? (
-          // Chef Specials - Premium Card Layout
-          <div className="space-y-8">
-            {filteredSubcategories.map((sub) => (
-              <div key={sub.id} className="animate-fade-up">
-                {/* Hero Image for Chef Specials */}
-                <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden mb-8 group">
-                  <img 
-                    src={sub.image} 
-                    alt={sub.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">{sub.emoji}</span>
-                      <h2 className="font-display text-2xl md:text-3xl text-foreground">
-                        {sub.name}
-                      </h2>
-                    </div>
-                    <p className="text-muted-foreground text-sm">Curated by our culinary experts</p>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-semibold backdrop-blur-sm">
-                      <Star className="w-3 h-3 fill-current" />
-                      Must Try
-                    </span>
-                  </div>
-                </div>
 
-                {/* Premium Grid Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {sub.items.map((item, idx) => (
+          {/* No Results */}
+          {filteredSubcategories.length === 0 ? (
+            <div className="text-center py-16 max-w-md mx-auto">
+              <p className="text-lg text-muted-foreground mb-4">No items found for "{searchQuery}"</p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setSearchQuery('')}
+                className="rounded-full"
+              >
+                Clear Search
+              </Button>
+            </div>
+          ) : (
+            /* Accordion Menu */
+            <div className="space-y-2 max-w-4xl mx-auto">
+              {filteredSubcategories.map((sub, idx) => {
+                const isOpen = expandedCategories.has(sub.id);
+                const isChefSpecial = sub.mainCategoryId === 'chef-specials';
+                
+                return (
+                  <div 
+                    key={sub.id}
+                    className={cn(
+                      "rounded-xl overflow-hidden border transition-all duration-300",
+                      isChefSpecial 
+                        ? "border-primary/40 bg-gradient-to-r from-primary/5 via-card/50 to-primary/5" 
+                        : "border-border/30 bg-card/30 backdrop-blur-sm hover:border-border/50"
+                    )}
+                    style={{ animationDelay: `${idx * 30}ms` }}
+                  >
+                    {/* Category Header */}
+                    <button
+                      onClick={() => toggleCategory(sub.id)}
+                      className="w-full flex items-center gap-3 p-3 md:p-4 text-left transition-colors hover:bg-card/50"
+                    >
+                      {/* Thumbnail */}
+                      <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-border/30">
+                        <img 
+                          src={sub.image} 
+                          alt={sub.name}
+                          className="w-full h-full object-cover"
+                        />
+                        {isChefSpecial && (
+                          <div className="absolute inset-0 bg-primary/20" />
+                        )}
+                      </div>
+                      
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-base">{sub.emoji}</span>
+                          <h3 className={cn(
+                            "font-display text-base md:text-lg truncate",
+                            isChefSpecial ? "text-primary" : "text-foreground"
+                          )}>
+                            {sub.name}
+                          </h3>
+                          {isChefSpecial && (
+                            <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-[10px] font-semibold">
+                              <Star className="w-2.5 h-2.5 fill-current" />
+                              Must Try
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11px] text-muted-foreground">
+                          {sub.mainCategory} • {sub.items.length} item{sub.items.length !== 1 ? 's' : ''}
+                        </p>
+                      </div>
+                      
+                      {/* Chevron */}
+                      <ChevronDown 
+                        className={cn(
+                          "w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0",
+                          isOpen && "rotate-180 text-primary"
+                        )} 
+                      />
+                    </button>
+
+                    {/* Expandable Content */}
                     <div 
-                      key={idx}
                       className={cn(
-                        "group relative p-5 rounded-xl border transition-all duration-300 cursor-default",
-                        item.isSignature 
-                          ? "bg-gradient-to-br from-primary/10 via-card to-card border-primary/30 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10" 
-                          : "bg-card/50 border-border/30 hover:border-border/60 hover:bg-card"
+                        "grid transition-all duration-300 ease-out",
+                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                       )}
                     >
-                      {item.isSignature && (
-                        <div className="absolute -top-2 -right-2">
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-[10px] font-semibold shadow-lg shadow-primary/30">
-                            <Star className="w-2.5 h-2.5 fill-current" />
-                            Signature
-                          </span>
-                        </div>
-                      )}
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
-                          {item.name}
-                        </h3>
-                        {item.price && (
-                          <span className="text-primary font-semibold whitespace-nowrap">
-                            {item.price}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          // Regular Categories - Accordion Style
-          <div className="space-y-3 max-w-4xl mx-auto">
-            {filteredSubcategories.map((sub, idx) => {
-              const isOpen = activeSubCategory === sub.id;
-              return (
-                <div 
-                  key={sub.id}
-                  className="rounded-xl overflow-hidden border border-border/30 bg-card/30 backdrop-blur-sm transition-all duration-300 hover:border-border/50"
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                >
-                  {/* Subcategory Header */}
-                  <button
-                    onClick={() => handleSubCategoryClick(sub.id)}
-                    className="w-full flex items-center gap-4 p-4 md:p-5 text-left transition-colors hover:bg-card/50"
-                  >
-                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src={sub.image} 
-                        alt={sub.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-lg">{sub.emoji}</span>
-                        <h3 className="font-display text-lg md:text-xl text-foreground truncate">
-                          {sub.name}
-                        </h3>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        {sub.items.length} item{sub.items.length !== 1 ? 's' : ''}
-                      </p>
-                    </div>
-                    <ChevronDown 
-                      className={cn(
-                        "w-5 h-5 text-muted-foreground transition-transform duration-300",
-                        isOpen && "rotate-180 text-primary"
-                      )} 
-                    />
-                  </button>
-
-                  {/* Expandable Content */}
-                  <div 
-                    className={cn(
-                      "grid transition-all duration-300 ease-out",
-                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="px-4 pb-5 md:px-5 md:pb-6 pt-2 border-t border-border/20">
-                        <ul className="space-y-2">
-                          {sub.items.map((item, itemIdx) => (
-                            <li 
-                              key={itemIdx}
-                              className={cn(
-                                "flex items-center justify-between gap-3 py-2.5 px-3 rounded-lg transition-all duration-200 group/item",
-                                item.isSignature 
-                                  ? "bg-primary/5 hover:bg-primary/10" 
-                                  : "hover:bg-muted/30"
-                              )}
-                            >
-                              <div className="flex items-center gap-3 min-w-0">
-                                {item.isSignature ? (
-                                  <Star className="w-3.5 h-3.5 text-primary fill-primary/30 flex-shrink-0" />
-                                ) : (
-                                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-colors flex-shrink-0" />
+                      <div className="overflow-hidden">
+                        <div className="px-3 pb-4 md:px-4 md:pb-5 pt-1 border-t border-border/20">
+                          {/* Items Grid */}
+                          <div className={cn(
+                            "grid gap-2",
+                            isChefSpecial 
+                              ? "grid-cols-1 md:grid-cols-2" 
+                              : "grid-cols-1 sm:grid-cols-2"
+                          )}>
+                            {sub.items.map((item, itemIdx) => (
+                              <div 
+                                key={itemIdx}
+                                className={cn(
+                                  "flex items-center justify-between gap-3 py-2.5 px-3 rounded-lg transition-all duration-200 group/item",
+                                  item.isSignature 
+                                    ? "bg-primary/8 hover:bg-primary/15 border border-primary/20" 
+                                    : "hover:bg-muted/30"
                                 )}
-                                <span className={cn(
-                                  "text-sm text-foreground group-hover/item:text-primary transition-colors truncate",
-                                  item.isSignature && "font-medium"
-                                )}>
-                                  {item.name}
-                                </span>
+                              >
+                                <div className="flex items-center gap-2.5 min-w-0">
+                                  {item.isSignature ? (
+                                    <Star className="w-3.5 h-3.5 text-primary fill-primary/30 flex-shrink-0" />
+                                  ) : (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-colors flex-shrink-0" />
+                                  )}
+                                  <span className={cn(
+                                    "text-sm text-foreground group-hover/item:text-primary transition-colors",
+                                    item.isSignature && "font-medium"
+                                  )}>
+                                    {item.name}
+                                  </span>
+                                </div>
+                                {item.price && (
+                                  <span className="text-sm font-medium text-primary whitespace-nowrap">
+                                    {item.price}
+                                  </span>
+                                )}
                               </div>
-                              {item.price && (
-                                <span className="text-sm font-medium text-primary whitespace-nowrap">
-                                  {item.price}
-                                </span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                        {sub.note && (
-                          <p className="mt-4 text-xs text-muted-foreground italic px-3">
-                            {sub.note}
-                          </p>
-                        )}
+                            ))}
+                          </div>
+                          
+                          {/* Note */}
+                          {sub.note && (
+                            <p className="mt-3 text-xs text-muted-foreground italic px-3 py-2 bg-muted/20 rounded-lg">
+                              {sub.note}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Special Notes */}
-      <Section dark>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-2xl text-foreground mb-4">Dietary Information</h2>
-          <p className="text-muted-foreground mb-6">
-            We cater to various dietary requirements at our Hyderabad cafe. Please inform our staff about any 
-            allergies or dietary restrictions. Vegetarian, vegan, and lactose-free options are available.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Prices are subject to GST and service charge. Menu items may vary seasonally.
-          </p>
+                );
+              })}
+            </div>
+          )}
         </div>
-      </Section>
+      </section>
 
       <Footer />
     </div>
