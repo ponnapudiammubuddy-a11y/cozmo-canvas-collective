@@ -150,14 +150,19 @@ const Index = () => {
             description="With over 15 years in luxury hospitality, Alexander leads the group's vision for expansion and excellence."
           />
           <DirectorCard 
-            name="Victoria Ellis"
+            name="Padma Vijaya"
             role="Director of Operations"
-            description="Victoria ensures seamless operations across all venues, maintaining our high standards of service."
+            description="Padma ensures seamless operations across all venues, maintaining our high standards of service."
           />
           <DirectorCard 
-            name="Marcus Williams"
+            name="Sidhaartha"
             role="Culinary Director"
-            description="A celebrated chef bringing innovative cuisine and exceptional dining experiences to our guests."
+            description="An award-winning chef bringing innovative cuisine and exceptional dining experiences to our guests."
+          />
+          <DirectorCard 
+            name="Vidya Sagar"
+            role="Brand Director"
+            description="Vidya shapes our visual identity and guest experience, ensuring consistency across all brands."
           />
         </div>
       </Section>
