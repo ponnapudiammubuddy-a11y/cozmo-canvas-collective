@@ -40,7 +40,7 @@ const Leadership = () => {
           <DirectorCard 
             name="Samuel Charles"
             role="Founder & CEO"
-            description="With over 15 years in luxury hospitality, Alexander leads the group's strategic vision and expansion. His passion for excellence and guest experience drives every decision."
+            description="With over 5 years in luxury hospitality, Alexander leads the group's strategic vision and expansion. His passion for excellence and guest experience drives every decision."
           />
           <DirectorCard 
             name="Padma Vijaya"
