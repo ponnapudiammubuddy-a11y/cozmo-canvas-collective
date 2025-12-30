@@ -12,11 +12,13 @@ import chefSpecial from '@/assets/chef-special.jpg';
 const slides = [
   {
     image: heroLounge,
-    label: 'WELCOME TO',
-    name: 'C E\nHospitality',
-    tagline: 'Experience the art of premium hospitality. From artisan coffee to gourmet cuisine, immerse yourself in elegance.',
-    cta: 'Reserve a Table',
-    ctaLink: '/booking',
+    label: 'WHERE CONVERSATIONS BREW & IDEAS FLOW',
+    name: 'C E Hospitality\nCozmo Cafe Bistro Lounge',
+    tagline: 'Welcome to C E Hospitality — a modern café & lounge experience built for Hyderabad\'s vibrant minds. From casual catch-ups and coffee breaks to business meetings and late-night conversations, we\'re your go-to space to eat, work, relax, and connect.',
+    cta: 'Visit Your Nearest Branch',
+    ctaLink: '/contact',
+    secondaryCta: 'Explore Our Menu',
+    secondaryCtaLink: '/menu',
   },
   {
     image: signatureCoffee,
@@ -222,7 +224,9 @@ export function CinematicHero() {
                 <Link to={slides[currentSlide].ctaLink}>{slides[currentSlide].cta}</Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/about">Explore Our Brand</Link>
+                <Link to={slides[currentSlide].secondaryCtaLink || '/menu'}>
+                  {slides[currentSlide].secondaryCta || 'Explore Our Menu'}
+                </Link>
               </Button>
             </div>
           </div>
