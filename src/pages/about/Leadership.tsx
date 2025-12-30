@@ -49,12 +49,12 @@ const Leadership = () => {
           />
           <DirectorCard 
             name="Sidhaartha"
-            role="Culinary Director"
+            role="Board of Director"
             description="An award-winning chef bringing innovative cuisine and exceptional dining experiences. Sidhaartha curates our menus with creativity and precision."
           />
           <DirectorCard 
             name="Vidya Sagar"
-            role="Brand Director"
+            role="Board of Director"
             description="Vidya shapes the visual identity and guest experience across all C E Hospitality brands, ensuring consistency and memorable impressions."
           />
         </div>
