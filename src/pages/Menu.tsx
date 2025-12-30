@@ -566,75 +566,71 @@ const Menu = () => {
       
       <Navigation />
       
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 bg-card">
+      {/* Hero - Compact */}
+      <section className="relative pt-24 pb-6 bg-card">
         <div className="container mx-auto px-6 text-center">
-          <span className="text-primary font-accent text-xl italic mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-            Crafted with Passion
-          </span>
-          <h1 className="font-display text-5xl md:text-6xl text-foreground mb-6 opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+          <h1 className="font-display text-4xl md:text-5xl text-foreground mb-3 opacity-0 animate-fade-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
             Our <span className="text-gradient-gold">Menu</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 opacity-0 animate-fade-up" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
-            From classic espressos to gourmet dishes, 
-            discover our carefully curated selection of beverages and food.
+          <p className="text-base text-muted-foreground max-w-xl mx-auto mb-4 opacity-0 animate-fade-up" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
+            Discover our carefully curated selection of beverages and food.
           </p>
-          <div className="opacity-0 animate-fade-up" style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}>
-            <Button 
-              variant="gold-outline" 
-              size="lg"
-              onClick={() => {
-                generateMenuPdf(menuData);
-                toast.success('Menu PDF downloaded successfully!');
-              }}
-            >
-              <Download className="w-4 h-4 mr-2" />
-              Download PDF Menu
-            </Button>
-          </div>
           
-          {/* Search Bar */}
-          <div className="mt-8 max-w-md mx-auto opacity-0 animate-fade-up" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          {/* Search & Download Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 opacity-0 animate-fade-up" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+            <div className="relative w-full max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search for dishes, drinks..."
+                placeholder="Search dishes, drinks..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-10 py-3 h-12 bg-background border-border text-foreground placeholder:text-muted-foreground rounded-full"
+                className="pl-9 pr-8 py-2 h-9 bg-background border-border text-foreground placeholder:text-muted-foreground rounded-full text-sm"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
-            {searchQuery && (
-              <p className="text-sm text-muted-foreground mt-2">
-                Found {filteredMenuData.reduce((acc, cat) => acc + cat.items.length, 0)} items
-              </p>
-            )}
+            <Button 
+              variant="gold-outline" 
+              size="sm"
+              onClick={() => {
+                generateMenuPdf(menuData);
+                toast.success('Menu PDF downloaded successfully!');
+              }}
+              className="h-9 px-4 text-sm"
+            >
+              <Download className="w-3.5 h-3.5 mr-1.5" />
+              PDF
+            </Button>
           </div>
           
-          {/* Filter Buttons */}
-          <div className="mt-6 flex flex-wrap justify-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '1100ms', animationFillMode: 'forwards' }}>
+          {searchQuery && (
+            <p className="text-xs text-muted-foreground mb-3">
+              Found {filteredMenuData.reduce((acc, cat) => acc + cat.items.length, 0)} items
+            </p>
+          )}
+          
+          {/* Filter Buttons - Compact */}
+          <div className="flex flex-wrap justify-center gap-1.5 mb-4 opacity-0 animate-fade-up" style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}>
             {filterButtons.map((filter) => {
               const Icon = filter.icon;
               return (
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
                     activeFilter === filter.id
-                      ? 'bg-primary text-primary-foreground shadow-lg'
-                      : 'bg-card border border-border text-foreground hover:border-primary/50 hover:bg-card/80'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-background/50 border border-border/50 text-foreground hover:border-primary/50'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4" />}
+                  {Icon && <Icon className="w-3 h-3" />}
                   {filter.label}
                 </button>
               );
@@ -643,36 +639,77 @@ const Menu = () => {
         </div>
       </section>
 
-      {/* Quick Navigation */}
-      {!searchQuery && (
-        <Section className="py-6 border-b border-border sticky top-20 bg-background/95 backdrop-blur-sm z-40">
-          <nav aria-label="Menu categories" className="flex flex-wrap justify-center gap-2">
-            {menuData.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => scrollToCategory(category.id)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap ${
-                  activeCategory === category.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card border border-border text-foreground hover:border-primary/50'
-                }`}
-              >
-                <span className="mr-1">{category.emoji}</span>
-                {category.name}
-              </button>
-            ))}
-          </nav>
-        </Section>
+      {/* Category Navigation - Compact Sticky Bar */}
+      {!searchQuery && activeFilter === 'all' && (
+        <section className="py-3 border-b border-border/50 sticky top-20 bg-background/98 backdrop-blur-md z-40">
+          <div className="container mx-auto px-4">
+            {/* Desktop: 2 rows max */}
+            <nav aria-label="Menu categories" className="hidden lg:flex flex-wrap justify-center gap-1.5 max-w-6xl mx-auto">
+              {menuData.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => scrollToCategory(category.id)}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all duration-200 whitespace-nowrap ${
+                    activeCategory === category.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-card/80 border border-border/40 text-foreground hover:border-primary/60 hover:bg-card'
+                  }`}
+                >
+                  <span className="text-xs">{category.emoji}</span>
+                  {category.name}
+                </button>
+              ))}
+            </nav>
+            
+            {/* Tablet: Horizontal scroll */}
+            <nav aria-label="Menu categories" className="hidden md:flex lg:hidden overflow-x-auto scrollbar-hide gap-1.5 pb-1 -mx-4 px-4">
+              {menuData.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => scrollToCategory(category.id)}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    activeCategory === category.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-card/80 border border-border/40 text-foreground hover:border-primary/60'
+                  }`}
+                >
+                  <span className="text-xs">{category.emoji}</span>
+                  {category.name}
+                </button>
+              ))}
+            </nav>
+            
+            {/* Mobile: Single horizontal scroll */}
+            <nav aria-label="Menu categories" className="flex md:hidden overflow-x-auto scrollbar-hide gap-1.5 pb-1 -mx-4 px-4">
+              {menuData.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => scrollToCategory(category.id)}
+                  className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    activeCategory === category.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-card/80 border border-border/40 text-foreground hover:border-primary/60'
+                  }`}
+                >
+                  <span className="text-[10px]">{category.emoji}</span>
+                  {category.name}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </section>
       )}
 
-      {/* Menu Categories */}
-      <div className="py-16">
+
+      {/* Menu Categories - Reduced padding */}
+      <div className="py-6">
         {filteredMenuData.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-xl text-muted-foreground">No items found for "{searchQuery}"</p>
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground">No items found for "{searchQuery}"</p>
             <Button 
               variant="outline" 
-              className="mt-4"
+              size="sm"
+              className="mt-3"
               onClick={() => setSearchQuery('')}
             >
               Clear Search
@@ -682,30 +719,30 @@ const Menu = () => {
           <section 
             key={category.id} 
             id={category.id}
-            className={`py-12 ${categoryIndex % 2 === 0 ? 'bg-background' : 'bg-card'}`}
+            className={`py-8 ${categoryIndex % 2 === 0 ? 'bg-background' : 'bg-card/50'}`}
           >
-            <div className="container mx-auto px-6">
-              <div className="grid lg:grid-cols-2 gap-10 items-center">
-                {/* Image */}
+            <div className="container mx-auto px-4 lg:px-6">
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                {/* Image - Larger and clearer */}
                 <div className={`${categoryIndex % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group">
+                  <div className="relative overflow-hidden rounded-xl aspect-[16/10] group shadow-lg">
                     <img 
                       src={category.image} 
                       alt={category.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="absolute bottom-6 left-6">
-                      <span className="text-4xl">{category.emoji}</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                      <span className="text-3xl">{category.emoji}</span>
+                      <h2 className="font-display text-xl md:text-2xl text-white drop-shadow-lg">
+                        {category.name}
+                      </h2>
                     </div>
                   </div>
                 </div>
 
-                {/* Content */}
+                {/* Content - Cleaner layout */}
                 <div className={`${categoryIndex % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-                    {category.emoji} {category.name}
-                  </h2>
                   <ul className="space-y-2">
                     {category.items.map((item, itemIndex) => (
                       <li 
