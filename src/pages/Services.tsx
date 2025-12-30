@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import { 
   UtensilsCrossed, Truck, PartyPopper, Users, 
-  Sparkles, Building2, Music, Cake, ArrowRight
+  Sparkles, Building2, Music, Cake, ArrowRight,
+  Hotel, Heart, ShieldCheck, MapPin
 } from 'lucide-react';
 
 // Services Schema
@@ -71,6 +72,51 @@ const Services = () => {
           </p>
         </div>
       </section>
+
+      {/* What We Offer */}
+      <Section>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-display text-3xl text-foreground mb-10">What We Offer</h2>
+          <div className="space-y-8">
+            <div className="flex gap-5">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Hotel className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-2">Smart & Comfortable Stays</h3>
+                <p className="text-muted-foreground">Modern, well-designed spaces created for relaxation and productivity.</p>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Heart className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-2">Guest-Centric Service</h3>
+                <p className="text-muted-foreground">A friendly team that listens, responds quickly, and goes the extra mile.</p>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <ShieldCheck className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-2">Clean, Safe & Reliable</h3>
+                <p className="text-muted-foreground">Strict hygiene standards and seamless operations you can trust.</p>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl text-foreground mb-2">Convenient Locations</h3>
+                <p className="text-muted-foreground">Strategically located properties for easy access and smooth travel.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       {/* Main Services */}
       <Section>
