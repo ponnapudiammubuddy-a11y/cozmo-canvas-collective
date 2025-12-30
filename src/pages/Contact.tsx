@@ -233,6 +233,55 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
+      {/* Nearby Landmarks */}
+      <Section>
+        <div className="text-center mb-10">
+          <span className="text-primary font-accent text-lg italic mb-2 block">Easy to Find</span>
+          <h2 className="font-display text-3xl text-foreground">Nearby Landmarks</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-6 bg-card border border-border rounded-xl text-center hover:border-primary/50 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-medium text-foreground mb-2">Lodha Bellaza</h3>
+            <p className="text-muted-foreground text-sm">Right next to the building</p>
+          </div>
+          <div className="p-6 bg-card border border-border rounded-xl text-center hover:border-primary/50 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-medium text-foreground mb-2">KPHB Metro Station</h3>
+            <p className="text-muted-foreground text-sm">5 minutes walk</p>
+          </div>
+          <div className="p-6 bg-card border border-border rounded-xl text-center hover:border-primary/50 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-medium text-foreground mb-2">JNTU</h3>
+            <p className="text-muted-foreground text-sm">10 minutes drive</p>
+          </div>
+          <div className="p-6 bg-card border border-border rounded-xl text-center hover:border-primary/50 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-medium text-foreground mb-2">Kukatpally Y Junction</h3>
+            <p className="text-muted-foreground text-sm">8 minutes drive</p>
+          </div>
+        </div>
+        <div className="text-center mt-8">
+          <a 
+            href="https://www.google.com/maps/dir//KPHB+Phase+4,+Kukatpally,+Hyderabad,+Telangana+500072"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+          >
+            <MapPin className="w-5 h-5" />
+            Get Directions on Google Maps
+          </a>
+        </div>
+      </Section>
+
       <Footer />
     </div>
   );
