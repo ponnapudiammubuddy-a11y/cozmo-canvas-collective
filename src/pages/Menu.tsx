@@ -4,7 +4,7 @@ import { Footer } from '@/components/Footer';
 import { Section } from '@/components/Section';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Download, Search, X } from 'lucide-react';
+import { Download, Search, X, Coffee, Leaf, Drumstick } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { generateMenuPdf } from '@/lib/generateMenuPdf';
 import { toast } from 'sonner';
@@ -52,7 +52,10 @@ interface MenuCategory {
   image: string;
   items: MenuItem[];
   note?: string;
+  type: 'beverage' | 'veg' | 'nonveg' | 'mixed';
 }
+
+type FilterType = 'all' | 'beverage' | 'veg' | 'nonveg';
 
 const menuData: MenuCategory[] = [
   // ===== BEVERAGES =====
@@ -61,6 +64,7 @@ const menuData: MenuCategory[] = [
     name: 'Classic Hot',
     emoji: '☕',
     image: classicHotImg,
+    type: 'beverage',
     items: [
       { name: 'Espresso' },
       { name: 'Double Espresso' },
@@ -77,6 +81,7 @@ const menuData: MenuCategory[] = [
     name: 'Café Special Hot',
     emoji: '☕',
     image: cafeSpecialHotImg,
+    type: 'beverage',
     items: [
       { name: 'Hazelnut Latte' },
       { name: 'Caramel Latte' },
@@ -90,6 +95,7 @@ const menuData: MenuCategory[] = [
     name: 'Iced Coffee',
     emoji: '🧊',
     image: icedCoffeeImg,
+    type: 'beverage',
     items: [
       { name: 'Iced Americano' },
       { name: 'Iced Latte' },
@@ -102,6 +108,7 @@ const menuData: MenuCategory[] = [
     name: 'Cold Coffee',
     emoji: '❄️',
     image: coldCoffeeImg,
+    type: 'beverage',
     items: [
       { name: 'Frappe' },
       { name: 'Choco Frappe' },
@@ -116,6 +123,7 @@ const menuData: MenuCategory[] = [
     name: 'Iced Teas',
     emoji: '🍹',
     image: icedTeasImg,
+    type: 'beverage',
     items: [
       { name: 'Lemon Iced Tea' },
       { name: 'Passion Fruit Iced Tea' },
@@ -128,6 +136,7 @@ const menuData: MenuCategory[] = [
     name: 'Espresso Based Cold Infusion',
     emoji: '🍊',
     image: espressoInfusionImg,
+    type: 'beverage',
     items: [
       { name: 'Espresso Cranberry' },
       { name: 'Espresso Orange' },
@@ -141,6 +150,7 @@ const menuData: MenuCategory[] = [
     name: 'Hot Teas',
     emoji: '🍵',
     image: hotTeasImg,
+    type: 'beverage',
     items: [
       { name: 'Green Tea' },
       { name: 'White Ginger Tea' },
@@ -153,6 +163,7 @@ const menuData: MenuCategory[] = [
     name: 'Matcha',
     emoji: '🍃',
     image: matchaImg,
+    type: 'beverage',
     items: [
       { name: 'Iced Matcha' },
       { name: 'Oat Milk Iced Matcha' },
@@ -167,6 +178,7 @@ const menuData: MenuCategory[] = [
     name: 'Signature Chocolate',
     emoji: '🍫',
     image: chocolateImg,
+    type: 'beverage',
     items: [
       { name: 'Hot Chocolate' },
       { name: 'Spiced Hot Chocolate' },
@@ -178,6 +190,7 @@ const menuData: MenuCategory[] = [
     name: 'Shakes',
     emoji: '🥤',
     image: shakesImg,
+    type: 'beverage',
     items: [
       { name: 'Vanilla Shake' },
       { name: 'Chocolate Shake' },
@@ -194,6 +207,7 @@ const menuData: MenuCategory[] = [
     name: 'Mojitos & Refreshers',
     emoji: '🌿',
     image: mojitosImg,
+    type: 'beverage',
     items: [
       { name: 'Virgin Mojito' },
       { name: 'Fresh Lime Soda (Sweet / Salt)' },
@@ -218,6 +232,7 @@ const menuData: MenuCategory[] = [
     name: 'Slashes',
     emoji: '❄️',
     image: slashesImg,
+    type: 'beverage',
     items: [
       { name: 'Kiwi Slashes' },
       { name: 'Mango Slashes' },
@@ -231,6 +246,7 @@ const menuData: MenuCategory[] = [
     name: 'Soup',
     emoji: '🍲',
     image: soupsImg,
+    type: 'mixed',
     items: [
       { name: 'Tomato Basil', price: '₹199' },
       { name: 'Spinach & Broccoli', price: '₹229' },
@@ -247,6 +263,7 @@ const menuData: MenuCategory[] = [
     name: 'Salad',
     emoji: '🥗',
     image: saladsImg,
+    type: 'veg',
     items: [
       { name: 'Millet & Root Vegetable', price: '₹249' },
       { name: 'Watermelon & Feta', price: '₹279' },
@@ -259,6 +276,7 @@ const menuData: MenuCategory[] = [
     name: 'Easy Bites',
     emoji: '🍟',
     image: easyBitesImg,
+    type: 'mixed',
     items: [
       { name: 'Fries (Salted / Peri Peri / Cheesy / Karam Podi)', price: '₹199 / ₹229 / ₹249 / ₹229' },
       { name: 'Lotus Stem Chips', price: '₹229' },
@@ -270,6 +288,7 @@ const menuData: MenuCategory[] = [
     name: 'Appetizers – Veg',
     emoji: '🌱',
     image: appetizersVegImg,
+    type: 'veg',
     items: [
       { name: 'Nachos Veg', price: '₹299' },
       { name: 'Pesto Mushroom Toast', price: '₹249' },
@@ -285,6 +304,7 @@ const menuData: MenuCategory[] = [
     name: 'Appetizers – Non Veg',
     emoji: '🍗',
     image: appetizersNonvegImg,
+    type: 'nonveg',
     items: [
       { name: 'Nachos Chicken', price: '₹329' },
       { name: 'Crispy Parmesan Chicken', price: '₹329' },
@@ -301,6 +321,7 @@ const menuData: MenuCategory[] = [
     name: 'Sando',
     emoji: '🥪',
     image: sandwichesImg,
+    type: 'mixed',
     items: [
       { name: 'Bombay Style Sandwich', price: '₹249' },
       { name: 'American Spinach Ricotta', price: '₹299' },
@@ -316,6 +337,7 @@ const menuData: MenuCategory[] = [
     name: 'Burgers',
     emoji: '🍔',
     image: burgersImg,
+    type: 'mixed',
     items: [
       { name: 'Veggies Overloaded', price: '₹249' },
       { name: 'Paneer Chilli Burger', price: '₹249' },
@@ -329,6 +351,7 @@ const menuData: MenuCategory[] = [
     name: 'Pizza (9 inch)',
     emoji: '🍕',
     image: pizzasImg,
+    type: 'mixed',
     items: [
       { name: 'Classic Margherita', price: '₹369' },
       { name: 'Farm House', price: '₹399' },
@@ -343,6 +366,7 @@ const menuData: MenuCategory[] = [
     name: 'Healthy Bowls',
     emoji: '🥗',
     image: healthyBowlsImg,
+    type: 'veg',
     items: [
       { name: 'Quinoa Bowl', price: '₹299' },
       { name: 'Millet Bowl', price: '₹299' },
@@ -354,6 +378,7 @@ const menuData: MenuCategory[] = [
     name: 'Pasta',
     emoji: '🍝',
     image: pastaImg,
+    type: 'mixed',
     items: [
       { name: 'Alfredo (Veg / Non Veg)', price: '₹319 / ₹349' },
       { name: 'Arrabbiata (Veg / Non Veg)', price: '₹309 / ₹339' },
@@ -367,6 +392,7 @@ const menuData: MenuCategory[] = [
     name: 'Rice & Noodles',
     emoji: '🍜',
     image: riceNoodlesImg,
+    type: 'mixed',
     items: [
       { name: 'Pad Thai Noodles', price: '₹299' },
       { name: 'Vegan Ramen', price: '₹299' },
@@ -381,6 +407,7 @@ const menuData: MenuCategory[] = [
     name: 'Chef Special',
     emoji: '👨‍🍳',
     image: chefSpecialImg,
+    type: 'mixed',
     items: [
       { name: 'Stuffed Chicken with Orange Capers Sauce', price: '₹349' },
       { name: 'Steam Pomfret with Creamy Garlic Sauce', price: '₹449' },
@@ -397,6 +424,7 @@ const menuData: MenuCategory[] = [
     name: 'Breads & Croissants',
     emoji: '🍞',
     image: breadsImg,
+    type: 'veg',
     items: [
       { name: 'Focaccia', price: '₹150' },
       { name: 'Brioche Loaf (500g)', price: '₹240' },
@@ -411,6 +439,7 @@ const menuData: MenuCategory[] = [
     name: 'Desserts',
     emoji: '🍰',
     image: dessertsImg,
+    type: 'veg',
     items: [
       { name: 'Classic Tiramisu', price: '₹249' },
       { name: 'Opera Cake', price: '₹249' },
@@ -429,6 +458,7 @@ const menuData: MenuCategory[] = [
     name: 'Cookies & Berliners',
     emoji: '🍪',
     image: cookiesImg,
+    type: 'veg',
     items: [
       { name: 'Choco Chip Cookie', price: '₹69' },
       { name: 'Oatmeal Raisin Cookie', price: '₹59' },
@@ -443,6 +473,7 @@ const menuData: MenuCategory[] = [
     name: 'Cakes',
     emoji: '🎂',
     image: cakesImg,
+    type: 'veg',
     items: [
       { name: 'Red Velvet (500g)', price: '₹750' },
       { name: 'Black Forest', price: '₹650' },
@@ -477,20 +508,43 @@ const menuSchema = {
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
 
   const filteredMenuData = useMemo(() => {
-    if (!searchQuery.trim()) return menuData;
+    let data = menuData;
     
-    const query = searchQuery.toLowerCase();
-    return menuData
-      .map(category => ({
-        ...category,
-        items: category.items.filter(item => 
-          item.name.toLowerCase().includes(query)
-        )
-      }))
-      .filter(category => category.items.length > 0);
-  }, [searchQuery]);
+    // Apply filter
+    if (activeFilter !== 'all') {
+      data = data.filter(category => {
+        if (activeFilter === 'beverage') return category.type === 'beverage';
+        if (activeFilter === 'veg') return category.type === 'veg' || category.type === 'mixed';
+        if (activeFilter === 'nonveg') return category.type === 'nonveg' || category.type === 'mixed';
+        return true;
+      });
+    }
+    
+    // Apply search
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      data = data
+        .map(category => ({
+          ...category,
+          items: category.items.filter(item => 
+            item.name.toLowerCase().includes(query)
+          )
+        }))
+        .filter(category => category.items.length > 0);
+    }
+    
+    return data;
+  }, [searchQuery, activeFilter]);
+
+  const filterButtons = [
+    { id: 'all' as FilterType, label: 'All', icon: null },
+    { id: 'beverage' as FilterType, label: 'Beverages', icon: Coffee },
+    { id: 'veg' as FilterType, label: 'Veg', icon: Leaf },
+    { id: 'nonveg' as FilterType, label: 'Non-Veg', icon: Drumstick },
+  ];
 
   const scrollToCategory = (categoryId: string) => {
     setActiveCategory(categoryId);
@@ -564,6 +618,27 @@ const Menu = () => {
                 Found {filteredMenuData.reduce((acc, cat) => acc + cat.items.length, 0)} items
               </p>
             )}
+          </div>
+          
+          {/* Filter Buttons */}
+          <div className="mt-6 flex flex-wrap justify-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '1100ms', animationFillMode: 'forwards' }}>
+            {filterButtons.map((filter) => {
+              const Icon = filter.icon;
+              return (
+                <button
+                  key={filter.id}
+                  onClick={() => setActiveFilter(filter.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeFilter === filter.id
+                      ? 'bg-primary text-primary-foreground shadow-lg'
+                      : 'bg-card border border-border text-foreground hover:border-primary/50 hover:bg-card/80'
+                  }`}
+                >
+                  {Icon && <Icon className="w-4 h-4" />}
+                  {filter.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
