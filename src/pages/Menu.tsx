@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Section } from '@/components/Section';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Download, Search, X } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { generateMenuPdf } from '@/lib/generateMenuPdf';
 import { toast } from 'sonner';
@@ -475,6 +476,21 @@ const menuSchema = {
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredMenuData = useMemo(() => {
+    if (!searchQuery.trim()) return menuData;
+    
+    const query = searchQuery.toLowerCase();
+    return menuData
+      .map(category => ({
+        ...category,
+        items: category.items.filter(item => 
+          item.name.toLowerCase().includes(query)
+        )
+      }))
+      .filter(category => category.items.length > 0);
+  }, [searchQuery]);
 
   const scrollToCategory = (categoryId: string) => {
     setActiveCategory(categoryId);
@@ -522,32 +538,72 @@ const Menu = () => {
               Download PDF Menu
             </Button>
           </div>
+          
+          {/* Search Bar */}
+          <div className="mt-8 max-w-md mx-auto opacity-0 animate-fade-up" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search for dishes, drinks..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-12 pr-10 py-3 h-12 bg-background border-border text-foreground placeholder:text-muted-foreground rounded-full"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <p className="text-sm text-muted-foreground mt-2">
+                Found {filteredMenuData.reduce((acc, cat) => acc + cat.items.length, 0)} items
+              </p>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Quick Navigation */}
-      <Section className="py-6 border-b border-border sticky top-20 bg-background/95 backdrop-blur-sm z-40">
-        <nav aria-label="Menu categories" className="flex flex-wrap justify-center gap-2">
-          {menuData.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => scrollToCategory(category.id)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap ${
-                activeCategory === category.id
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-card border border-border text-foreground hover:border-primary/50'
-              }`}
-            >
-              <span className="mr-1">{category.emoji}</span>
-              {category.name}
-            </button>
-          ))}
-        </nav>
-      </Section>
+      {!searchQuery && (
+        <Section className="py-6 border-b border-border sticky top-20 bg-background/95 backdrop-blur-sm z-40">
+          <nav aria-label="Menu categories" className="flex flex-wrap justify-center gap-2">
+            {menuData.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => scrollToCategory(category.id)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 whitespace-nowrap ${
+                  activeCategory === category.id
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-card border border-border text-foreground hover:border-primary/50'
+                }`}
+              >
+                <span className="mr-1">{category.emoji}</span>
+                {category.name}
+              </button>
+            ))}
+          </nav>
+        </Section>
+      )}
 
       {/* Menu Categories */}
       <div className="py-16">
-        {menuData.map((category, categoryIndex) => (
+        {filteredMenuData.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-xl text-muted-foreground">No items found for "{searchQuery}"</p>
+            <Button 
+              variant="outline" 
+              className="mt-4"
+              onClick={() => setSearchQuery('')}
+            >
+              Clear Search
+            </Button>
+          </div>
+        ) : filteredMenuData.map((category, categoryIndex) => (
           <section 
             key={category.id} 
             id={category.id}
