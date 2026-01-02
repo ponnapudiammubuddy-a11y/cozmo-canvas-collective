@@ -65,7 +65,9 @@ export function Navigation() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const navRef = useRef<HTMLElement>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -73,6 +75,24 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        if (activeDropdown) {
+          setIsClosing(true);
+          setTimeout(() => {
+            setActiveDropdown(null);
+            setIsClosing(false);
+          }, 150);
+        }
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [activeDropdown]);
+
   const handleDropdownEnter = (itemName: string) => {
     if (dropdownTimeoutRef.current) {
       clearTimeout(dropdownTimeoutRef.current);
@@ -88,20 +108,34 @@ export function Navigation() {
     }, 150);
   };
   const handleSubItemClick = (href: string) => {
-    // Close dropdown with animation
     setIsClosing(true);
     setTimeout(() => {
       setActiveDropdown(null);
       setIsClosing(false);
-      // Navigate to page
       navigate(href);
     }, 100);
+  };
+  const closeDropdown = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setActiveDropdown(null);
+      setIsClosing(false);
+    }, 150);
   };
   const handleMobileSubItemClick = (href: string) => {
     setIsOpen(false);
     navigate(href);
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50' : 'bg-transparent'}`}>
+  return <>
+    {/* Backdrop overlay when dropdown is open */}
+    {activeDropdown && (
+      <div 
+        className={`fixed inset-0 bg-background/60 backdrop-blur-sm transition-opacity duration-200 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
+        style={{ zIndex: 40 }}
+        onClick={closeDropdown}
+      />
+    )}
+    <nav ref={navRef} className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50' : 'bg-transparent'}`}>
       {/* Top Bar */}
       <div className="hidden lg:block border-b border-border/30">
         <div className="container mx-auto px-6 py-2 flex justify-between items-center text-sm">
@@ -252,5 +286,6 @@ export function Navigation() {
           animation: dropdownClose 0.15s ease-out forwards;
         }
       `}</style>
-    </nav>;
+    </nav>
+  </>;
 }
