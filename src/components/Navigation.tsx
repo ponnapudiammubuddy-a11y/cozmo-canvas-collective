@@ -146,9 +146,10 @@ export function Navigation() {
                 </Link>
                 
                 {/* Elegant Dropdown */}
-                {item.subItems && activeDropdown === item.name && <div className={`absolute top-full left-0 pt-2 z-50 ${isClosing ? 'animate-dropdown-close' : 'animate-dropdown-open'}`}>
-                    <div className="bg-card/98 backdrop-blur-xl border border-border/60 rounded-xl shadow-2xl overflow-hidden min-w-[220px]" style={{
-                boxShadow: '0 20px 60px hsla(20, 10%, 5%, 0.6), 0 0 30px hsla(38, 90%, 55%, 0.08)'
+                {item.subItems && activeDropdown === item.name && <div className={`absolute top-full left-0 pt-2 ${isClosing ? 'animate-dropdown-close' : 'animate-dropdown-open'}`} style={{ zIndex: 9999 }}>
+                    <div className="bg-card backdrop-blur-xl border border-border/60 rounded-xl shadow-2xl overflow-hidden min-w-[220px]" style={{
+                boxShadow: '0 20px 60px hsla(20, 10%, 5%, 0.9), 0 0 30px hsla(38, 90%, 55%, 0.15)',
+                backgroundColor: 'hsl(var(--card))'
               }}>
                       {/* Dropdown header accent */}
                       <div className="h-[2px] bg-gradient-to-r from-primary via-accent to-primary" />
